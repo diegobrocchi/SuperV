@@ -13,7 +13,8 @@ namespace SuperV
 
         public void GetLastData()
         {
-            Clients.All.refreshData(DateTime.Now.ToLongTimeString());
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<SR_firstHub>();
+            context.Clients.All.refreshData(DateTime.Now.ToLongTimeString());
         }
     }
 

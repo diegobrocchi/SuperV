@@ -30,6 +30,8 @@ namespace SuperV.Controllers
 
         public ActionResult Panel()
         {
+            var mg = new SQLDependencyManager();
+            mg.RegisterSQLDependencyOnTableMachineStatus();
             return View();
         }
 
