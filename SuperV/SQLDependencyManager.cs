@@ -51,7 +51,7 @@ namespace SuperV
         {
             if (e.Type == SqlNotificationType.Change)
             {
-                var hub = new SR_firstHub();
+                var hub = new SignalRHub();
 
                 hub.GetLastData();
 

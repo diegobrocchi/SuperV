@@ -1,1 +1,150 @@
-﻿<h1>Hello partial @DateTime.Now </h1>
+﻿@model SuperV.ViewModels.PartialPanelVM
+
+<div class="top-5">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-md-3">
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        Macchina 1
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <div class="list-group-item">
+                                <span class="badge">Art.001</span>
+                                <i class="fa fa-amazon"></i>
+                                @Model.MachinesData.Where(x => x.MachineID == 1).SingleOrDefault().ProductCode
+                            </div>
+                            <div class="list-group-item">
+                                <span class="badge">@Model.MachinesData.Where(x => x.MachineID == 1).SingleOrDefault().TotalCount</span>
+                                <i class="fa fa-calendar"></i>
+                                Conteggio pezzi
+                            </div>
+                            <div class="list-group-item list-group-item-warning">
+                                <span class="badge">@Model.MachinesData.Where(x => x.MachineID == 1).SingleOrDefault().PartialCount</span>
+                                <i class="fa fa-address-book"></i>
+                                Conteggio parziale
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        Macchina 2
+                    </div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <div class="list-group-item">
+                                <span class="badge">Art.001</span>
+                                <i class="fa fa-amazon"></i>
+                                @Model.MachinesData.Where(x => x.MachineID == 2).SingleOrDefault().ProductCode
+                            </div>
+                            <div class="list-group-item">
+                                <span class="badge">@Model.MachinesData.Where(x => x.MachineID == 2).SingleOrDefault().TotalCount</span>
+                                <i class="fa fa-calendar"></i>
+                                Conteggio pezzi
+                            </div>
+                            <div class="list-group-item list-group-item-warning">
+                                <span class="badge">@Model.MachinesData.Where(x => x.MachineID == 2).SingleOrDefault().PartialCount</span>
+                                <i class="fa fa-address-book"></i>
+                                Conteggio parziale
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-4  col-md-3">
+                <div class="counter-content">
+                    Counter R1N3
+                </div>
+            </div>
+            <div class="clearfix visible-sm-block"></div>
+            <div class="col-sm-4 col-md-3">
+                <div class="counter-content">
+                    Counter R1N4
+                </div>
+            </div>
+            <div class="clearfix visible-md-block"></div>
+
+            <div class="col-sm-4 col-md-3">
+                <div class="counter-content">
+                    Counter R2N1
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <div class="counter-content">
+                    Counter R2N2
+                </div>
+            </div>
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-sm-4 col-md-3">
+                <div class="counter-content">
+                    Counter R2N3
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <div class="counter-content">
+                    Counter R2N4
+                </div>
+            </div>
+            <div class="clearfix visible-md-block"></div>
+
+
+            <div class="col-sm-4 col-md-3">
+                <div class="counter-content">
+                    Counter R3N1
+                </div>
+            </div>
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-sm-4 col-md-3">
+                <div class="counter-content">
+                    Counter R3N2
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <div class="counter-content">
+                    Counter R3N3
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <div class="counter-content">
+                    Counter R3N4
+                </div>
+            </div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-sm-4 col-md-3">
+                <div class="counter-content">
+                    Counter R4N1
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <div class="counter-content">
+                    Counter R4N2
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <div class="counter-content">
+                    Counter R4N3
+                </div>
+            </div>
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-sm-4 col-md-3">
+                <div class="counter-content">
+                    Counter R4N4
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
