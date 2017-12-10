@@ -12,8 +12,6 @@ namespace SuperV
                         "~/Scripts/jquery-{version}.js",
                         "~/Scripts/jquery.signalR-2.2.2.js"));
 
-            
-
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
@@ -24,7 +22,9 @@ namespace SuperV
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js",
+                      "~/Scripts/jquery.bootstrap-autohidingnavbar.js",
+                      "~/Scripts/site.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/signalr").Include(
                 "~/Scripts/signalR_loader.js",

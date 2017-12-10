@@ -11,7 +11,7 @@ namespace SuperVCore.BusinessLogic
     public class MachineStatusManager
     {
         /// <summary>
-        /// Aggiunge lo stato per la macchina, oppure aggiorna quello esistente.
+        /// Aggiunge lo stato per la macchina identificata da MachineID, oppure aggiorna quello esistente.
         /// </summary>
         /// <param name="current"></param>
         public void Upsert(UpsertMachineStatus current)

@@ -10,7 +10,7 @@ namespace SuperV.ViewModels
         public int MachineID { get; set; }
         public string ProductCode { get; set; }
         public int TotalCount { get; set; }
-        public int PartialCount { get; set; }
+        public int Speed { get; set; }
         public int Status { get; set; }
     }
 }

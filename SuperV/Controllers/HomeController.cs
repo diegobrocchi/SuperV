@@ -39,7 +39,7 @@ namespace SuperV.Controllers
                 var db = ctx.MachineStatus.Select(x => new ViewModels.MachineData()
                 {
                     MachineID = x.MachineID,
-                    PartialCount = x.ResettableCounter,
+                    Speed = x.ResettableCounter,
                     ProductCode = x.ProductCode,
                     Status = x.MachineStateID,
                     TotalCount = x.Counter
@@ -50,7 +50,7 @@ namespace SuperV.Controllers
             model.MachinesData.Add(new ViewModels.MachineData()
             {
                 MachineID =1,
-                PartialCount = 124,
+                Speed = 124,
                 ProductCode = "XYZ-009",
                 Status = 1,
                 TotalCount = 1098
@@ -58,7 +58,7 @@ namespace SuperV.Controllers
             model.MachinesData.Add(new ViewModels.MachineData()
             {
                 MachineID = 2,
-                PartialCount = 345,
+                Speed = 345,
                 ProductCode = "POL-098",
                 Status = 2,
                 TotalCount = 23456
@@ -83,7 +83,7 @@ namespace SuperV.Controllers
                 machinesData = ctx.MachineStatus.Select(x => new ViewModels.MachineData()
                 {
                     MachineID = x.MachineID,
-                    PartialCount = x.ResettableCounter,
+                    Speed = x.Speed,
                     ProductCode = x.ProductCode,
                     Status = x.MachineStateID,
                     TotalCount = x.Counter
