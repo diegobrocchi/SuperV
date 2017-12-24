@@ -25,6 +25,8 @@ namespace SuperV.ViewModels
                         return Constants.BG_COLOR_WORKING_STATUS;
                     case 1:
                         return Constants.BG_COLOR_STOPPED_STATUS;
+                    case 2:
+                        return Constants.BG_COLOR_CHANGE_STATUS;
                     default:
                         return string.Empty;
                 }
@@ -40,6 +42,8 @@ namespace SuperV.ViewModels
                         return Constants.BG_COLOR_WORKING_STATUS_STRIPE;
                     case 1:
                         return Constants.BG_COLOR_STOPPED_STATUS_STRIPE;
+                    case 2:
+                        return Constants.BG_COLOR_CHANGE_STATUS_STRIPE;
                     default:
                         return string.Empty;
                 }
