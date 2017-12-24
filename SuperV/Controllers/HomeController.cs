@@ -46,10 +46,10 @@ namespace SuperV.Controllers
                 }).ToList();
             }
 
-                var model = new ViewModels.PartialPanelVM();
+            var model = new ViewModels.PartialPanelVM();
             model.MachinesData.Add(new ViewModels.MachineData()
             {
-                MachineID =1,
+                MachineID = 1,
                 Speed = 124,
                 ProductCode = "XYZ-009",
                 Status = 1,
@@ -86,12 +86,14 @@ namespace SuperV.Controllers
                     Speed = x.Speed,
                     ProductCode = x.ProductCode,
                     Status = x.MachineStateID,
-                    TotalCount = x.Counter
+                    TotalCount = x.Counter,
+                    MachineName = "RT345", 
+                     WorkOperation = "99 "
                 }).ToList();
             }
 
             model.MachinesData = machinesData;
-            
+
             return PartialView("_panelPartial", model);
         }
     }

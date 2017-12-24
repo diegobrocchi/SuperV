@@ -20,7 +20,7 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 400px;
 }
 
 .counter-content {
@@ -82,4 +82,84 @@ textarea {
 
 .form-bottom form .input-error {
 	border-color: #de995e;
+}
+
+.padding-5{
+    padding-left: 5px;
+    padding-right:5px;
+
+}
+
+.padding-2{
+    padding-left: 2px;
+    padding-right:2px;
+}
+
+.well-machine{
+    padding-left:15px;
+    padding-right:15px;
+    padding-top:5px;
+    border-radius:15px;
+    border: 0px;
+    min-height:220px;
+}
+
+.well-machine .machine-name{
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.well-machine .machine-speed{
+    font-size: 4em;
+    font-weight:bold;
+    text-align: center;
+    margin-top:5px;
+    
+}
+
+.well-machine .machine-speed-label{
+    font-size:0.75em;
+    text-align:center;
+    margin-bottom:5px;
+}
+
+.well-machine .machine-operation{
+    font-size:1.2em;
+    text-align:center;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.well-machine .machine-productCode{
+    font-size:0.75em;
+    text-align:center;
+}
+
+/* colore di una macchina INATTIVA*/
+.bg-machine-inactive{
+    background-color: #FFFFFF;
+}
+/* colore centrale di una macchina INATTIVA */
+.bg-highlight-strip-inactive{
+    background-color:#999999;
+}
+
+/* colore di una macchina OPERATIVA */
+.bg-machine-working{
+    background-color:#88CC33;
+}
+
+/* striscia centrale di una macchina OPERATIVA*/
+.bg-highlight-strip-working{
+    background-color: #557722;
+}
+
+/* colore di una macchina CAMBIO */
+.bg-machine-change{
+    background-color:#FF77AA;
+}
+.bg-highlight-strip-change{
+    background-color:#994466;
 }
