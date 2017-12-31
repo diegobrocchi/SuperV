@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 5px;
     padding-bottom: 20px;
 }
 
@@ -104,6 +104,14 @@ textarea {
     min-height:220px;
 }
 
+.anchorNoStyle a:link ,
+.anchorNoStyle a:visited ,
+.anchorNoStyle a:hover ,
+.anchorNoStyle a:active   {
+  color: inherit ; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+
 .well-machine .machine-name{
     font-size: 1.5em;
     font-weight: bold;
@@ -133,8 +141,89 @@ textarea {
 }
 
 .well-machine .machine-productCode{
-    font-size:0.75em;
+    font-size:0.85em;
+    font-weight:bold;
     text-align:center;
+}
+
+/* colore di una macchina DISCONNESSA (0) GRIGIO SCURO */
+.bg-machine-disconnected {
+    background-color : #FFFFFF;
+}
+
+/* colore centrale di una macchina DISCONNESSA (0) */
+.bg-highlight-strip-disconnected {
+    background-color:#999999;
+}
+
+/* colore di una macchina in EMERGENZA (1) ROSSO */
+.bg-machine-emergency {
+    background-color: #FF5757;
+}
+
+/* colore centrale di una macchina in EMERGENZA (1) ROSSO */
+.bg-highlight-strip-emergency {
+    background-color: #be3e3e;
+}
+
+/* colore di una macchina in ALLARME (2) GIALLO */
+.bg-machine-alarm {
+    background-color: #FF8B00;
+}
+
+/* colore centrale di una macchine in ALLARME (2)*/
+.bg-highlight-strip-alarm {
+    background-color : #bf6900;
+}
+
+/* colore di una macchine RUN (3) */
+.bg-machine-run {
+     background-color:#8DC73F;
+}
+
+/* colore centrale di una macchina in RUN (3)*/
+.bg-highlight-strip-run {
+    background-color: #557722;
+}
+
+/* colore di una macchina MARCIA IN ALLARME (4) ARANCIONE */
+.bg-machine-run-alarm {
+    background-color: #F36523;
+}
+
+/* colore centrale di una macchina in MARCIA IN ALLARME (4) */
+.bg-highlight-strip-run-alarm {
+    background-color: #c8541d;
+}
+
+/* colroe di una macchine in ARRESTO (5) */
+.bg-machine-stop {
+    background-color : #A9AAAE;
+}
+
+/* colore centrale di una macchina in ARRESTO (5) */
+.bg-highlight-strip-stop {
+    background-color: #88898d;
+}
+
+/* colore di una macchina in ATTREZZAGGIO (6)*/
+.bg-machine-setup {
+    background-color:#7DA7D9;
+}
+
+/* colore centrale di una macchina in ATTREZZAGGIO (6) */
+.bg-highlight-strip-setup {
+    background-color: #5e80a8;
+}
+
+/* colore di una macchina in AVVIAMENTO (7) */
+.bg-machine-startup {
+    background-color: #f275a9;
+}
+
+/* colore centrale di una macchina in AVVIAMENTO (7) */
+.bg-highlight-strip-startup {
+    background-color: #924766;
 }
 
 /* colore di una macchina INATTIVA*/
@@ -163,3 +252,19 @@ textarea {
 .bg-highlight-strip-change{
     background-color:#994466;
 }
+
+
+#overlay {
+        background: rgba(218, 219, 217, 0.50);
+        color: #666666;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        z-index: 5000;
+        top: 0;
+        left: 0;
+        float: left;
+        text-align: center;
+        padding-top: 25%;
+        
+    }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f37327e367ed47f48515da9676f5a432" Name="Diagram1" ZoomLevel="97">
+        <EntityTypeShape EntityType="EnoplasticModel.AS400ImportData" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.Departments" Width="1.5" PointX="1" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.Downtimes" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.General" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.MachineAlarms" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.Machines" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.MachinesAlarmsLog" Width="1.5" PointX="8.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.MachineSetUpParts" Width="1.5" PointX="8.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.MachineStates" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.MachineStatus" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.Materials" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.MaterialsWeights" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.ProcessingSteps" Width="1.5" PointX="0.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.Production" Width="1.5" PointX="12.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.SetUpParts" Width="1.5" PointX="6" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.SetUpPartsLog" Width="1.5" PointX="15.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.Shifts" Width="1.5" PointX="10.5" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.Workers" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.Works" Width="2" PointX="10.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.WorkStates" Width="1.5" PointX="8.25" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.View_ExportWorks" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnoplasticModel.View_ExportWorks2" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="EnoplasticModel.FK_Machines_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_Downtimes_MachineAlarms" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_Downtimes_Machines" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_Downtimes_Works" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_MachinesAlarmsLog_MachineAlarms" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_MachinesAlarmsLog_Machines" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_MachineSetUpParts_Machines" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_MachineStatus_Machines" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_ProcessingSteps_Machines" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_Production_Machines" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_Works_Machines" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_MachineSetUpParts_SetUpParts" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_MachineStatus_MachineStates" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_ProcessingSteps_MachineStates" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_Production_MachineStates" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_Works_ProcessingSteps" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_Production_Shifts" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_Production_Works" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_SetUpPartsLog_SetUpParts" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_SetUpPartsLog_Works" ManuallyRouted="false" />
+        <AssociationConnector Association="EnoplasticModel.FK_Works_WorkStates" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

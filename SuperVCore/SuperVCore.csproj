@@ -58,50 +58,147 @@
   <ItemGroup>
     <Compile Include="BusinessLogic\MachineStatusManager.cs" />
     <Compile Include="Cache\RedisCache.cs" />
+    <Compile Include="Context\AS400ImportData.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Departments.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Downtimes.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\EnoplasticContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnoplasticContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\EnoplasticContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\EnoplasticContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnoplasticContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Context\General.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MachineAlarms.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Machines.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MachinesAlarmsLog.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MachineSetUpParts.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MachineStates.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\MachineStatus.cs">
-      <DependentUpon>SuperVContext.tt</DependentUpon>
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\SuperVContext.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SuperVContext.Context.tt</DependentUpon>
+    <Compile Include="Context\Materials.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\SuperVContext.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SuperVContext.tt</DependentUpon>
+    <Compile Include="Context\MaterialsWeights.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\SuperVContext.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SuperVContext.edmx</DependentUpon>
+    <Compile Include="Context\ProcessingSteps.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Production.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\SetUpParts.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\SetUpPartsLog.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Shifts.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\SP_AggegatedData_Machine_Result.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\SP_AggegatedDowntimes_Machine_CODE_Result.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\SP_AggegatedPhase_Machine_CODE_Result.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\SP_AggegatedSetUpLog_Machine_CODE_Result.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\SP_AggegatedWorks_Machine_Result.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\SP_GraphicProduction_GroupBy_Machines_Result.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\sp_helpdiagrams_Result.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\SP_ReportWorks2_StartDate_EndDate_Result.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\SP_ReportWorks_StartDate_EndDate_MachineID_Result.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\SP_ReportWorks_StartDate_EndDate_Result.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\sysdiagrams.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\View_ExportWorks.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\View_ExportWorks2.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Workers.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Works.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\WorkStates.cs">
+      <DependentUpon>EnoplasticContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UpsertMachineStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Context\SuperVContext.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SuperVContext.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="Context\SuperVContext.edmx.diagram">
-      <DependentUpon>SuperVContext.edmx</DependentUpon>
+    <EntityDeploy Include="Context\EnoplasticContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EnoplasticContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Context\EnoplasticContext.edmx.diagram">
+      <DependentUpon>EnoplasticContext.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Context\SuperVContext.Context.tt">
+    <Content Include="Context\EnoplasticContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SuperVContext.Context.cs</LastGenOutput>
-      <DependentUpon>SuperVContext.edmx</DependentUpon>
+      <DependentUpon>EnoplasticContext.edmx</DependentUpon>
+      <LastGenOutput>EnoplasticContext.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Context\SuperVContext.tt">
+    <Content Include="Context\EnoplasticContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SuperVContext.edmx</DependentUpon>
-      <LastGenOutput>SuperVContext.cs</LastGenOutput>
+      <DependentUpon>EnoplasticContext.edmx</DependentUpon>
+      <LastGenOutput>EnoplasticContext.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

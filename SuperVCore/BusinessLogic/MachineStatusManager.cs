@@ -16,7 +16,7 @@ namespace SuperVCore.BusinessLogic
         /// <param name="current"></param>
         public void Upsert(UpsertMachineStatus current)
         {
-            using (var ctx = new SupervisoreDBEntities())
+            using (var ctx = new EnoplasticEntities())
             {
                 var dbStatus = ctx.MachineStatus.Where(x => x.MachineID == current.MachineID).SingleOrDefault();
                 if (dbStatus == null)
@@ -47,5 +47,7 @@ namespace SuperVCore.BusinessLogic
                 ctx.SaveChanges();
             }
         }
+
+        
     }
 }

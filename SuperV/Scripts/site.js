@@ -1,3 +1,10 @@
 ﻿(function ($) {
     $("div.navbar-fixed-top").autoHidingNavbar();
-}(jQuery)); 
+    $(document).ajaxStart(function () {
+        $("#overlay").show();
+    }).ajaxStop(function () {
+        $("#overlay").hide();
+    });
+}(jQuery));
+
+//jQuery('#overlay').fadeOut();

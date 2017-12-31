@@ -13,35 +13,66 @@ namespace SuperV
     /// </summary>
     public class SQLDependencyManager
     {
-        readonly string _connString = ConfigurationManager.ConnectionStrings["SupervisoreDB"].ConnectionString;
+        private static SQLDependencyManager _instance = null;
+
+        protected  SQLDependencyManager()
+        {
+        }
+
+        public static SQLDependencyManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new SQLDependencyManager();
+
+                return _instance;
+            }
+        }
+
+        readonly string _connString = ConfigurationManager.ConnectionStrings["SupervisoreDBIdentity"].ConnectionString;
+        private bool _isRegistered;
+
+        public bool IsRegistered
+        {
+            get
+            {
+                return _isRegistered;
+            }
+        }
 
         public void RegisterSQLDependencyOnTableMachineStatus()
         {
-            using (var connection = new SqlConnection(_connString))
+            if (!IsRegistered)
             {
-                connection.Open();
-                using (var command = new SqlCommand(@"SELECT [MachineID]
+                using (var connection = new SqlConnection(_connString))
+                {
+                    connection.Open();
+                    using (var command = new SqlCommand(@"SELECT [MachineID]
                                                             ,[ProductCode]
                                                             ,[MachineStateID]
                                                             ,[Speed]
                                                             ,[AverageSpeed]
                                                             ,[Counter]
                                                             ,[ResettableCounter]
-                                                            ,[ErrorString]
+                                                            ,[ErrorsString]
                                                     FROM [dbo].[MachineStatus]", connection))
-                {
-                    command.Notification = null;
-
-                    var dependency = new SqlDependency(command);
-                    dependency.OnChange += new OnChangeEventHandler(dependency_OnChange);
-
-                    if (connection.State == ConnectionState.Closed)
-                        connection.Open();
-
-                    using (var reader = command.ExecuteReader())
                     {
-                        //non fa niente a parte eseguire il comando
-                        //server per registrare la SqlDependency
+                        command.Notification = null;
+
+                        var dependency = new SqlDependency(command);
+                        dependency.OnChange += new OnChangeEventHandler(dependency_OnChange);
+
+                        if (connection.State == ConnectionState.Closed)
+                            connection.Open();
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            //non fa niente a parte eseguire il comando
+                            //serve per registrare la SqlDependency
+                            if (!_isRegistered)
+                                _isRegistered = true;
+                        }
                     }
                 }
             }
@@ -51,10 +82,10 @@ namespace SuperV
         {
             if (e.Type == SqlNotificationType.Change)
             {
+                _isRegistered = false;
+
                 var hub = new SignalRHub();
-
                 hub.GetLastData();
-
                 RegisterSQLDependencyOnTableMachineStatus();
             }
         }

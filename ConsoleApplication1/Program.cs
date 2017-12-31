@@ -17,31 +17,28 @@ namespace ConsoleApplication1
             Random rnd = new Random();
             while (true)
             {
-                int ID = rnd.Next(1, 5);
+                byte[] ID = new byte[1];
+                byte []status =  new byte[1];
+                rnd.NextBytes(ID) ;
+                rnd.NextBytes(status);
                 var d = new SuperVCore.Models.UpsertMachineStatus()
                 {
-                    MachineID = ID,
+                    MachineID = ID[0],
                     AverageSpeed = rnd.Next(1, 10000),
                     Counter = rnd.Next(100,1000),
-                    MachineStatus = rnd.Next(1,3)-1,
+                    MachineStatus = status[0],
                     ProductCode = "wert" + rnd.Next(23,87),
                     ResettableCounter = rnd.Next(34, 9876),
                     Speed = rnd.Next(100,200)
                 };
                 Console.WriteLine("Update data dor machine " + ID);
-                SuperVCore.Upsert(d);
+                //SuperVCore.Upsert(d);
 
-                Console.WriteLine("Waiting 2 secs...");
-                System.Threading.Thread.Sleep(2000);
+                Console.WriteLine("Waiting 500 millisecs...");
+                System.Threading.Thread.Sleep(500);
             }
 
-            //SqlDependency.Start(ConfigurationManager.ConnectionStrings["SupervisoreDB"].ConnectionString);
-            //var mgr = new MessageRepo();
-            //Console.WriteLine(string.Join(",", mgr.GetAllMessages()));
-
-            //Console.ReadKey();
-
-            //SqlDependency.Stop(ConfigurationManager.ConnectionStrings["SupervisoreDB"].ConnectionString);
+             
         }
     }
 }

@@ -31,64 +31,37 @@ namespace SuperV.Controllers
 
         public ActionResult Panel()
         {
-            var mg = new SQLDependencyManager();
-            mg.RegisterSQLDependencyOnTableMachineStatus();
-
-            using (var ctx = new SuperVCore.Context.SupervisoreDBEntities())
-            {
-                var db = ctx.MachineStatus.Select(x => new ViewModels.MachineData()
-                {
-                    MachineID = x.MachineID,
-                    Speed = x.ResettableCounter,
-                    ProductCode = x.ProductCode,
-                    Status = x.MachineStateID,
-                    TotalCount = x.Counter
-                }).ToList();
-            }
-
-            var model = new ViewModels.PartialPanelVM();
-            model.MachinesData.Add(new ViewModels.MachineData()
-            {
-                MachineID = 1,
-                Speed = 124,
-                ProductCode = "XYZ-009",
-                Status = 1,
-                TotalCount = 1098
-            });
-            model.MachinesData.Add(new ViewModels.MachineData()
-            {
-                MachineID = 2,
-                Speed = 345,
-                ProductCode = "POL-098",
-                Status = 2,
-                TotalCount = 23456
-            });
-            return View(model);
+            return View();
         }
 
-        public ActionResult PanelDetail(int ID)
-        {
-            var model = new PanelDetailVM();
-            model.ID = ID;
-            model.Name = ID.ToString() + "-" + ID.ToString();
-            return View(model);
-        }
+        //public ActionResult PanelDetail(int ID)
+        //{
+        //    //var model = new PanelDetailVM();
+        //    //model.ID = ID;
+        //    //model.Name = ID.ToString() + "-" + ID.ToString();
+        //    //return View(model);
+
+        //    return View();
+        //}
 
         public ActionResult PanelPartial()
         {
+
+            System.Threading.Thread.Sleep(3000);
+
             var model = new PartialPanelVM();
             List<MachineData> machinesData = new List<ViewModels.MachineData>();
-            using (var ctx = new SuperVCore.Context.SupervisoreDBEntities())
+            using (var ctx = new SuperVCore.Context.EnoplasticEntities())
             {
                 machinesData = ctx.MachineStatus.Select(x => new ViewModels.MachineData()
                 {
-                    MachineID = x.MachineID,
-                    Speed = x.Speed,
+                    MachineID = x.MachineID ,
+                    Speed = x.Speed.Value,
                     ProductCode = x.ProductCode,
-                    Status = x.MachineStateID,
-                    TotalCount = x.Counter,
-                    MachineName = "RT345", 
-                     WorkOperation = "99 "
+                    Status = x.MachineStateID.Value,
+                    TotalCount = x.Counter.Value,
+                    MachineName = x.Machines.Name,
+                    WorkOperation = x.MachineStates.Name 
                 }).ToList();
             }
 
@@ -96,12 +69,26 @@ namespace SuperV.Controllers
 
             return PartialView("_panelPartial", model);
         }
+
+        public ActionResult MachineDetails(int ID)
+        {
+            ViewBag.ID = ID;
+            return View();
+        }
+
+        public ActionResult MachinePh1(int ID)
+        {
+            System.Threading.Thread.Sleep(3000);
+
+            ViewBag.ph1 = "AA " + DateTime.Now.Millisecond ;
+            return PartialView();
+        }
     }
 
-    public class PanelDetailVM
-    {
-        public int ID { get; set; }
-        public string Name { get; set; }
-    }
+    //public class PanelDetailVM
+    //{
+    //    public int ID { get; set; }
+    //    public string Name { get; set; }
+    //}
 
 }

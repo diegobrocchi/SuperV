@@ -1,0 +1,2130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EnoplasticModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AS400ImportData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="int" />
+          <Property Name="MaterialName" Type="nvarchar" MaxLength="100" />
+          <Property Name="MaterialHeightLeaf" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="QuantitySecondary" Type="decimal" Precision="18" Scale="3" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Downtimes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorksID" Type="int" />
+          <Property Name="MachineID" Type="tinyint" />
+          <Property Name="MachineAlarmID" Type="tinyint" />
+          <Property Name="Start" Type="smalldatetime" />
+          <Property Name="Minutes" Type="int" />
+          <Property Name="Worker" Type="int" />
+        </EntityType>
+        <EntityType Name="General">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KeyDescription" Type="nvarchar" MaxLength="50" />
+          <Property Name="Value" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MachineAlarms">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Number" Type="nvarchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="Machines">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsDisable" Type="bit" Nullable="false" />
+          <Property Name="DepartmantID" Type="int" Nullable="false" />
+          <Property Name="Multipler" Type="decimal" Precision="6" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MachinesAlarmsLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="MachineID" Type="tinyint" Nullable="false" />
+          <Property Name="MachineAlarmID" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MachineSetUpParts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MachineID" Type="tinyint" />
+          <Property Name="SetUpPartID" Type="int" />
+        </EntityType>
+        <EntityType Name="MachineStates">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="ColorCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HideSpeed" Type="bit" Nullable="false" />
+          <Property Name="HideAverageSpeed" Type="bit" Nullable="false" />
+          <Property Name="IsOutWorkPermitted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MachineStatus">
+          <Key>
+            <PropertyRef Name="MachineID" />
+          </Key>
+          <Property Name="MachineID" Type="tinyint" Nullable="false" />
+          <Property Name="WorkID" Type="int" />
+          <Property Name="ProductCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="MachineStateID" Type="tinyint" />
+          <Property Name="Speed" Type="int" />
+          <Property Name="AverageSpeed" Type="int" />
+          <Property Name="Counter" Type="int" />
+          <Property Name="ResettableCounter" Type="int" />
+          <Property Name="ErrorsString" Type="nchar" MaxLength="8" />
+          <Property Name="StartPhase" Type="smalldatetime" />
+          <Property Name="LastUpdate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Materials">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="20" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="HeightLeaf" Type="decimal" Precision="18" Scale="3" />
+        </EntityType>
+        <EntityType Name="MaterialsWeights">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MateriaMasterCode" Type="nchar" MaxLength="1" />
+          <Property Name="MaterialDescription" Type="nvarchar" MaxLength="100" />
+          <Property Name="MaterialSubCode" Type="nchar" MaxLength="4" />
+          <Property Name="WeightKgMq" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="ComboView" Type="bit" />
+        </EntityType>
+        <EntityType Name="ProcessingSteps">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MachineID" Type="tinyint" />
+          <Property Name="PhaseNumber" Type="tinyint" />
+          <Property Name="MachineStateID" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Production">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MachinesID" Type="tinyint" />
+          <Property Name="WorkID" Type="int" />
+          <Property Name="DateTimeProduction" Type="smalldatetime" />
+          <Property Name="Items" Type="int" />
+          <Property Name="ProductCode" Type="int" />
+          <Property Name="Counter" Type="int" />
+          <Property Name="MachineStateID" Type="tinyint" />
+          <Property Name="ShiftID" Type="tinyint" />
+          <Property Name="DateProduction" Type="date" />
+        </EntityType>
+        <EntityType Name="SetUpParts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SetUpPartsLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkID" Type="int" />
+          <Property Name="SetUpPartID" Type="int" />
+          <Property Name="Value" Type="int" />
+        </EntityType>
+        <EntityType Name="Shifts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Workers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkerCode" Type="int" />
+          <Property Name="WorkerName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Department" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Works">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="WorkStateID" Type="int" />
+          <Property Name="MachineID" Type="tinyint" />
+          <Property Name="MachineStateIDProcessingStep" Type="tinyint" />
+          <Property Name="ProcessingStepID" Type="int" />
+          <Property Name="UnitOfMeasure" Type="nvarchar" MaxLength="5" />
+          <Property Name="Quantity" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="QuantityMade" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="UnitOfMeasureSecondary" Type="nvarchar" MaxLength="5" />
+          <Property Name="QuantitySecondary" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="Start" Type="smalldatetime" />
+          <Property Name="Finish" Type="smalldatetime" />
+          <Property Name="Waste" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="Multipler" Type="decimal" Precision="6" Scale="3" />
+          <Property Name="Worker" Type="int" />
+          <Property Name="Worker2" Type="int" />
+          <Property Name="Worker3" Type="int" />
+          <Property Name="Mechanic" Type="int" />
+          <Property Name="Mechanic2" Type="int" />
+          <Property Name="Mechanic3" Type="int" />
+          <Property Name="Workers" Type="nvarchar(max)" />
+          <Property Name="Counter" Type="int" />
+          <Property Name="IsUrgent" Type="bit" Nullable="false" />
+          <Property Name="MaterialHeightLeaf" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="MaterialCode" Type="nvarchar" MaxLength="20" />
+          <Property Name="MaterialName" Type="nvarchar" MaxLength="100" />
+          <Property Name="MaterialHeightLeaf2" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="Multipler2" Type="decimal" Precision="6" Scale="3" />
+          <Property Name="RealWeightProduction" Type="decimal" Precision="18" Scale="3" />
+        </EntityType>
+        <EntityType Name="WorkStates">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Enoplastic.dbo.View_ExportWorks' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_ExportWorks">
+          <Key>
+            <PropertyRef Name="IDLavoro" />
+            <PropertyRef Name="Macchina" />
+            <PropertyRef Name="Fase" />
+          </Key>
+          <Property Name="IDLavoro" Type="int" Nullable="false" />
+          <Property Name="Bolla" Type="nvarchar" MaxLength="50" />
+          <Property Name="Macchina" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Fase" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UM" Type="nvarchar" MaxLength="5" />
+          <Property Name="Quantita" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Q.Fatta" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="UM2" Type="nvarchar" MaxLength="5" />
+          <Property Name="Quantita2" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Inizio" Type="smalldatetime" />
+          <Property Name="Fine" Type="smalldatetime" />
+          <Property Name="TempoMinuti" Type="int" />
+          <Property Name="Scarto" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Cod.Lavoratore" Type="int" />
+          <Property Name="NomeFermo" Type="nvarchar(max)" />
+          <Property Name="Minuti" Type="int" />
+          <Property Name="SetUp" Type="nvarchar" MaxLength="100" />
+          <Property Name="Q.SetUp" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Enoplastic.dbo.View_ExportWorks2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_ExportWorks2">
+          <Key>
+            <PropertyRef Name="Macchina" />
+            <PropertyRef Name="Materiale" />
+            <PropertyRef Name="sk" />
+            <PropertyRef Name="colori" />
+            <PropertyRef Name="HF" />
+            <PropertyRef Name="Fase" />
+          </Key>
+          <Property Name="Macchina" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Cod.Lavoratore" Type="int" />
+          <Property Name="Data" Type="smalldatetime" />
+          <Property Name="Bolla" Type="nvarchar" MaxLength="50" />
+          <Property Name="Materiale" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="sk" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="colori" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="HF" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="MT Richiesti" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MT Fatti" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="KG Richiesti" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Kg Fatti" Type="decimal" Precision="38" Scale="0" />
+          <Property Name="Fase" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Inizio" Type="smalldatetime" />
+          <Property Name="Fine" Type="smalldatetime" />
+          <Property Name="TempoMinuti" Type="int" />
+          <Property Name="ScartoKg" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ScartoMT" Type="decimal" Precision="38" Scale="0" />
+          <Property Name="NomeFermo" Type="nvarchar(max)" />
+          <Property Name="Minuti" Type="int" />
+        </EntityType>
+        <Association Name="FK_Downtimes_MachineAlarms">
+          <End Role="MachineAlarms" Type="Self.MachineAlarms" Multiplicity="0..1" />
+          <End Role="Downtimes" Type="Self.Downtimes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MachineAlarms">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Downtimes">
+              <PropertyRef Name="MachineAlarmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Downtimes_Machines">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="0..1" />
+          <End Role="Downtimes" Type="Self.Downtimes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Downtimes">
+              <PropertyRef Name="MachineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Downtimes_Works">
+          <End Role="Works" Type="Self.Works" Multiplicity="0..1" />
+          <End Role="Downtimes" Type="Self.Downtimes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Works">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Downtimes">
+              <PropertyRef Name="WorksID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Machines_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Machines" Type="Self.Machines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Machines">
+              <PropertyRef Name="DepartmantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MachinesAlarmsLog_MachineAlarms">
+          <End Role="MachineAlarms" Type="Self.MachineAlarms" Multiplicity="1" />
+          <End Role="MachinesAlarmsLog" Type="Self.MachinesAlarmsLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MachineAlarms">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MachinesAlarmsLog">
+              <PropertyRef Name="MachineAlarmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MachinesAlarmsLog_Machines">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="1" />
+          <End Role="MachinesAlarmsLog" Type="Self.MachinesAlarmsLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MachinesAlarmsLog">
+              <PropertyRef Name="MachineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MachineSetUpParts_Machines">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="0..1" />
+          <End Role="MachineSetUpParts" Type="Self.MachineSetUpParts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MachineSetUpParts">
+              <PropertyRef Name="MachineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MachineSetUpParts_SetUpParts">
+          <End Role="SetUpParts" Type="Self.SetUpParts" Multiplicity="0..1" />
+          <End Role="MachineSetUpParts" Type="Self.MachineSetUpParts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SetUpParts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MachineSetUpParts">
+              <PropertyRef Name="SetUpPartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MachineStatus_Machines">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="1" />
+          <End Role="MachineStatus" Type="Self.MachineStatus" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MachineStatus">
+              <PropertyRef Name="MachineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MachineStatus_MachineStates">
+          <End Role="MachineStates" Type="Self.MachineStates" Multiplicity="0..1" />
+          <End Role="MachineStatus" Type="Self.MachineStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MachineStates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MachineStatus">
+              <PropertyRef Name="MachineStateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcessingSteps_Machines">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="0..1" />
+          <End Role="ProcessingSteps" Type="Self.ProcessingSteps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProcessingSteps">
+              <PropertyRef Name="MachineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcessingSteps_MachineStates">
+          <End Role="MachineStates" Type="Self.MachineStates" Multiplicity="0..1" />
+          <End Role="ProcessingSteps" Type="Self.ProcessingSteps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MachineStates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProcessingSteps">
+              <PropertyRef Name="MachineStateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Production_Machines">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="0..1" />
+          <End Role="Production" Type="Self.Production" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Production">
+              <PropertyRef Name="MachinesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Production_MachineStates">
+          <End Role="MachineStates" Type="Self.MachineStates" Multiplicity="0..1" />
+          <End Role="Production" Type="Self.Production" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MachineStates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Production">
+              <PropertyRef Name="MachineStateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Production_Shifts">
+          <End Role="Shifts" Type="Self.Shifts" Multiplicity="0..1" />
+          <End Role="Production" Type="Self.Production" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shifts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Production">
+              <PropertyRef Name="ShiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Production_Works">
+          <End Role="Works" Type="Self.Works" Multiplicity="0..1" />
+          <End Role="Production" Type="Self.Production" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Works">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Production">
+              <PropertyRef Name="WorkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SetUpPartsLog_SetUpParts">
+          <End Role="SetUpParts" Type="Self.SetUpParts" Multiplicity="0..1" />
+          <End Role="SetUpPartsLog" Type="Self.SetUpPartsLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SetUpParts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SetUpPartsLog">
+              <PropertyRef Name="SetUpPartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SetUpPartsLog_Works">
+          <End Role="Works" Type="Self.Works" Multiplicity="0..1" />
+          <End Role="SetUpPartsLog" Type="Self.SetUpPartsLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Works">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SetUpPartsLog">
+              <PropertyRef Name="WorkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Works_Machines">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="0..1" />
+          <End Role="Works" Type="Self.Works" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Works">
+              <PropertyRef Name="MachineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Works_ProcessingSteps">
+          <End Role="ProcessingSteps" Type="Self.ProcessingSteps" Multiplicity="0..1" />
+          <End Role="Works" Type="Self.Works" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcessingSteps">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Works">
+              <PropertyRef Name="ProcessingStepID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Works_WorkStates">
+          <End Role="WorkStates" Type="Self.WorkStates" Multiplicity="0..1" />
+          <End Role="Works" Type="Self.Works" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkStates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Works">
+              <PropertyRef Name="WorkStateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="SP_AggegatedData_Machine" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Machine" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_AggegatedDowntimes_Machine_CODE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Machine" Type="int" Mode="In" />
+          <Parameter Name="Code" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_AggegatedPhase_Machine_CODE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Machine" Type="int" Mode="In" />
+          <Parameter Name="Code" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_AggegatedSetUpLog_Machine_CODE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Machine" Type="int" Mode="In" />
+          <Parameter Name="Code" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_AggegatedWorks_Machine" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Machine" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_GraphicProduction_GroupBy_Machines" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GroupBy" Type="nvarchar" Mode="In" />
+          <Parameter Name="Machine" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_InsertNewProduction" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_ReportWorks_StartDate_EndDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="startDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="endDate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="SP_ReportWorks_StartDate_EndDate_MachineID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="startDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="endDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="machineID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_ReportWorks2_StartDate_EndDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="startDate" Type="smalldatetime" Mode="In" />
+          <Parameter Name="endDate" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="EnoplasticModelStoreContainer">
+          <EntitySet Name="AS400ImportData" EntityType="Self.AS400ImportData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Downtimes" EntityType="Self.Downtimes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="General" EntityType="Self.General" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MachineAlarms" EntityType="Self.MachineAlarms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Machines" EntityType="Self.Machines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MachinesAlarmsLog" EntityType="Self.MachinesAlarmsLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MachineSetUpParts" EntityType="Self.MachineSetUpParts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MachineStates" EntityType="Self.MachineStates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MachineStatus" EntityType="Self.MachineStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materials" EntityType="Self.Materials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterialsWeights" EntityType="Self.MaterialsWeights" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProcessingSteps" EntityType="Self.ProcessingSteps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Production" EntityType="Self.Production" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SetUpParts" EntityType="Self.SetUpParts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SetUpPartsLog" EntityType="Self.SetUpPartsLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shifts" EntityType="Self.Shifts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workers" EntityType="Self.Workers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Works" EntityType="Self.Works" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkStates" EntityType="Self.WorkStates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_ExportWorks" EntityType="Self.View_ExportWorks" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_ExportWorks].[IDLavoro] AS [IDLavoro], 
+    [View_ExportWorks].[Bolla] AS [Bolla], 
+    [View_ExportWorks].[Macchina] AS [Macchina], 
+    [View_ExportWorks].[Fase] AS [Fase], 
+    [View_ExportWorks].[UM] AS [UM], 
+    [View_ExportWorks].[Quantita] AS [Quantita], 
+    [View_ExportWorks].[Q.Fatta] AS [Q.Fatta], 
+    [View_ExportWorks].[UM2] AS [UM2], 
+    [View_ExportWorks].[Quantita2] AS [Quantita2], 
+    [View_ExportWorks].[Inizio] AS [Inizio], 
+    [View_ExportWorks].[Fine] AS [Fine], 
+    [View_ExportWorks].[TempoMinuti] AS [TempoMinuti], 
+    [View_ExportWorks].[Scarto] AS [Scarto], 
+    [View_ExportWorks].[Cod.Lavoratore] AS [Cod.Lavoratore], 
+    [View_ExportWorks].[NomeFermo] AS [NomeFermo], 
+    [View_ExportWorks].[Minuti] AS [Minuti], 
+    [View_ExportWorks].[SetUp] AS [SetUp], 
+    [View_ExportWorks].[Q.SetUp] AS [Q.SetUp]
+    FROM [dbo].[View_ExportWorks] AS [View_ExportWorks]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_ExportWorks2" EntityType="Self.View_ExportWorks2" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_ExportWorks2].[Macchina] AS [Macchina], 
+    [View_ExportWorks2].[Cod.Lavoratore] AS [Cod.Lavoratore], 
+    [View_ExportWorks2].[Data] AS [Data], 
+    [View_ExportWorks2].[Bolla] AS [Bolla], 
+    [View_ExportWorks2].[Materiale] AS [Materiale], 
+    [View_ExportWorks2].[sk] AS [sk], 
+    [View_ExportWorks2].[colori] AS [colori], 
+    [View_ExportWorks2].[HF] AS [HF], 
+    [View_ExportWorks2].[MT Richiesti] AS [MT Richiesti], 
+    [View_ExportWorks2].[MT Fatti] AS [MT Fatti], 
+    [View_ExportWorks2].[KG Richiesti] AS [KG Richiesti], 
+    [View_ExportWorks2].[Kg Fatti] AS [Kg Fatti], 
+    [View_ExportWorks2].[Fase] AS [Fase], 
+    [View_ExportWorks2].[Inizio] AS [Inizio], 
+    [View_ExportWorks2].[Fine] AS [Fine], 
+    [View_ExportWorks2].[TempoMinuti] AS [TempoMinuti], 
+    [View_ExportWorks2].[ScartoKg] AS [ScartoKg], 
+    [View_ExportWorks2].[ScartoMT] AS [ScartoMT], 
+    [View_ExportWorks2].[NomeFermo] AS [NomeFermo], 
+    [View_ExportWorks2].[Minuti] AS [Minuti]
+    FROM [dbo].[View_ExportWorks2] AS [View_ExportWorks2]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Downtimes_MachineAlarms" Association="Self.FK_Downtimes_MachineAlarms">
+            <End Role="MachineAlarms" EntitySet="MachineAlarms" />
+            <End Role="Downtimes" EntitySet="Downtimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Downtimes_Machines" Association="Self.FK_Downtimes_Machines">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="Downtimes" EntitySet="Downtimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Downtimes_Works" Association="Self.FK_Downtimes_Works">
+            <End Role="Works" EntitySet="Works" />
+            <End Role="Downtimes" EntitySet="Downtimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Machines_Departments" Association="Self.FK_Machines_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Machines" EntitySet="Machines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MachinesAlarmsLog_MachineAlarms" Association="Self.FK_MachinesAlarmsLog_MachineAlarms">
+            <End Role="MachineAlarms" EntitySet="MachineAlarms" />
+            <End Role="MachinesAlarmsLog" EntitySet="MachinesAlarmsLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MachinesAlarmsLog_Machines" Association="Self.FK_MachinesAlarmsLog_Machines">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="MachinesAlarmsLog" EntitySet="MachinesAlarmsLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MachineSetUpParts_Machines" Association="Self.FK_MachineSetUpParts_Machines">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="MachineSetUpParts" EntitySet="MachineSetUpParts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MachineSetUpParts_SetUpParts" Association="Self.FK_MachineSetUpParts_SetUpParts">
+            <End Role="SetUpParts" EntitySet="SetUpParts" />
+            <End Role="MachineSetUpParts" EntitySet="MachineSetUpParts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MachineStatus_Machines" Association="Self.FK_MachineStatus_Machines">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="MachineStatus" EntitySet="MachineStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MachineStatus_MachineStates" Association="Self.FK_MachineStatus_MachineStates">
+            <End Role="MachineStates" EntitySet="MachineStates" />
+            <End Role="MachineStatus" EntitySet="MachineStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcessingSteps_Machines" Association="Self.FK_ProcessingSteps_Machines">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="ProcessingSteps" EntitySet="ProcessingSteps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcessingSteps_MachineStates" Association="Self.FK_ProcessingSteps_MachineStates">
+            <End Role="MachineStates" EntitySet="MachineStates" />
+            <End Role="ProcessingSteps" EntitySet="ProcessingSteps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Production_Machines" Association="Self.FK_Production_Machines">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="Production" EntitySet="Production" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Production_MachineStates" Association="Self.FK_Production_MachineStates">
+            <End Role="MachineStates" EntitySet="MachineStates" />
+            <End Role="Production" EntitySet="Production" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Production_Shifts" Association="Self.FK_Production_Shifts">
+            <End Role="Shifts" EntitySet="Shifts" />
+            <End Role="Production" EntitySet="Production" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Production_Works" Association="Self.FK_Production_Works">
+            <End Role="Works" EntitySet="Works" />
+            <End Role="Production" EntitySet="Production" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SetUpPartsLog_SetUpParts" Association="Self.FK_SetUpPartsLog_SetUpParts">
+            <End Role="SetUpParts" EntitySet="SetUpParts" />
+            <End Role="SetUpPartsLog" EntitySet="SetUpPartsLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SetUpPartsLog_Works" Association="Self.FK_SetUpPartsLog_Works">
+            <End Role="Works" EntitySet="Works" />
+            <End Role="SetUpPartsLog" EntitySet="SetUpPartsLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Works_Machines" Association="Self.FK_Works_Machines">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="Works" EntitySet="Works" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Works_ProcessingSteps" Association="Self.FK_Works_ProcessingSteps">
+            <End Role="ProcessingSteps" EntitySet="ProcessingSteps" />
+            <End Role="Works" EntitySet="Works" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Works_WorkStates" Association="Self.FK_Works_WorkStates">
+            <End Role="WorkStates" EntitySet="WorkStates" />
+            <End Role="Works" EntitySet="Works" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EnoplasticModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AS400ImportData">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" />
+          <Property Name="MaterialName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaterialHeightLeaf" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="QuantitySecondary" Type="Decimal" Precision="18" Scale="3" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Machines" Relationship="Self.FK_Machines_Departments" FromRole="Departments" ToRole="Machines" />
+        </EntityType>
+        <EntityType Name="Downtimes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorksID" Type="Int32" />
+          <Property Name="MachineID" Type="Byte" />
+          <Property Name="MachineAlarmID" Type="Byte" />
+          <Property Name="Start" Type="DateTime" Precision="0" />
+          <Property Name="Minutes" Type="Int32" />
+          <Property Name="Worker" Type="Int32" />
+          <NavigationProperty Name="MachineAlarms" Relationship="Self.FK_Downtimes_MachineAlarms" FromRole="Downtimes" ToRole="MachineAlarms" />
+          <NavigationProperty Name="Machines" Relationship="Self.FK_Downtimes_Machines" FromRole="Downtimes" ToRole="Machines" />
+          <NavigationProperty Name="Works" Relationship="Self.FK_Downtimes_Works" FromRole="Downtimes" ToRole="Works" />
+        </EntityType>
+        <EntityType Name="General">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KeyDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MachineAlarms">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Downtimes" Relationship="Self.FK_Downtimes_MachineAlarms" FromRole="MachineAlarms" ToRole="Downtimes" />
+          <NavigationProperty Name="MachinesAlarmsLog" Relationship="Self.FK_MachinesAlarmsLog_MachineAlarms" FromRole="MachineAlarms" ToRole="MachinesAlarmsLog" />
+        </EntityType>
+        <EntityType Name="Machines">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDisable" Type="Boolean" Nullable="false" />
+          <Property Name="DepartmantID" Type="Int32" Nullable="false" />
+          <Property Name="Multipler" Type="Decimal" Precision="6" Scale="3" Nullable="false" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK_Machines_Departments" FromRole="Machines" ToRole="Departments" />
+          <NavigationProperty Name="Downtimes" Relationship="Self.FK_Downtimes_Machines" FromRole="Machines" ToRole="Downtimes" />
+          <NavigationProperty Name="MachinesAlarmsLog" Relationship="Self.FK_MachinesAlarmsLog_Machines" FromRole="Machines" ToRole="MachinesAlarmsLog" />
+          <NavigationProperty Name="MachineSetUpParts" Relationship="Self.FK_MachineSetUpParts_Machines" FromRole="Machines" ToRole="MachineSetUpParts" />
+          <NavigationProperty Name="MachineStatus" Relationship="Self.FK_MachineStatus_Machines" FromRole="Machines" ToRole="MachineStatus" />
+          <NavigationProperty Name="ProcessingSteps" Relationship="Self.FK_ProcessingSteps_Machines" FromRole="Machines" ToRole="ProcessingSteps" />
+          <NavigationProperty Name="Production" Relationship="Self.FK_Production_Machines" FromRole="Machines" ToRole="Production" />
+          <NavigationProperty Name="Works" Relationship="Self.FK_Works_Machines" FromRole="Machines" ToRole="Works" />
+        </EntityType>
+        <EntityType Name="MachinesAlarmsLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MachineID" Type="Byte" Nullable="false" />
+          <Property Name="MachineAlarmID" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="MachineAlarms" Relationship="Self.FK_MachinesAlarmsLog_MachineAlarms" FromRole="MachinesAlarmsLog" ToRole="MachineAlarms" />
+          <NavigationProperty Name="Machines" Relationship="Self.FK_MachinesAlarmsLog_Machines" FromRole="MachinesAlarmsLog" ToRole="Machines" />
+        </EntityType>
+        <EntityType Name="MachineSetUpParts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MachineID" Type="Byte" />
+          <Property Name="SetUpPartID" Type="Int32" />
+          <NavigationProperty Name="Machines" Relationship="Self.FK_MachineSetUpParts_Machines" FromRole="MachineSetUpParts" ToRole="Machines" />
+          <NavigationProperty Name="SetUpParts" Relationship="Self.FK_MachineSetUpParts_SetUpParts" FromRole="MachineSetUpParts" ToRole="SetUpParts" />
+        </EntityType>
+        <EntityType Name="MachineStates">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ColorCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HideSpeed" Type="Boolean" Nullable="false" />
+          <Property Name="HideAverageSpeed" Type="Boolean" Nullable="false" />
+          <Property Name="IsOutWorkPermitted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MachineStatus" Relationship="Self.FK_MachineStatus_MachineStates" FromRole="MachineStates" ToRole="MachineStatus" />
+          <NavigationProperty Name="ProcessingSteps" Relationship="Self.FK_ProcessingSteps_MachineStates" FromRole="MachineStates" ToRole="ProcessingSteps" />
+          <NavigationProperty Name="Production" Relationship="Self.FK_Production_MachineStates" FromRole="MachineStates" ToRole="Production" />
+        </EntityType>
+        <EntityType Name="MachineStatus">
+          <Key>
+            <PropertyRef Name="MachineID" />
+          </Key>
+          <Property Name="MachineID" Type="Byte" Nullable="false" />
+          <Property Name="WorkID" Type="Int32" />
+          <Property Name="ProductCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MachineStateID" Type="Byte" />
+          <Property Name="Speed" Type="Int32" />
+          <Property Name="AverageSpeed" Type="Int32" />
+          <Property Name="Counter" Type="Int32" />
+          <Property Name="ResettableCounter" Type="Int32" />
+          <Property Name="ErrorsString" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="StartPhase" Type="DateTime" Precision="0" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Machines" Relationship="Self.FK_MachineStatus_Machines" FromRole="MachineStatus" ToRole="Machines" />
+          <NavigationProperty Name="MachineStates" Relationship="Self.FK_MachineStatus_MachineStates" FromRole="MachineStatus" ToRole="MachineStates" />
+        </EntityType>
+        <EntityType Name="Materials">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HeightLeaf" Type="Decimal" Precision="18" Scale="3" />
+        </EntityType>
+        <EntityType Name="MaterialsWeights">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MateriaMasterCode" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="MaterialDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaterialSubCode" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="WeightKgMq" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="ComboView" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ProcessingSteps">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MachineID" Type="Byte" />
+          <Property Name="PhaseNumber" Type="Byte" />
+          <Property Name="MachineStateID" Type="Byte" />
+          <NavigationProperty Name="Machines" Relationship="Self.FK_ProcessingSteps_Machines" FromRole="ProcessingSteps" ToRole="Machines" />
+          <NavigationProperty Name="MachineStates" Relationship="Self.FK_ProcessingSteps_MachineStates" FromRole="ProcessingSteps" ToRole="MachineStates" />
+          <NavigationProperty Name="Works" Relationship="Self.FK_Works_ProcessingSteps" FromRole="ProcessingSteps" ToRole="Works" />
+        </EntityType>
+        <EntityType Name="Production">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MachinesID" Type="Byte" />
+          <Property Name="WorkID" Type="Int32" />
+          <Property Name="DateTimeProduction" Type="DateTime" Precision="0" />
+          <Property Name="Items" Type="Int32" />
+          <Property Name="ProductCode" Type="Int32" />
+          <Property Name="Counter" Type="Int32" />
+          <Property Name="MachineStateID" Type="Byte" />
+          <Property Name="ShiftID" Type="Byte" />
+          <Property Name="DateProduction" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Machines" Relationship="Self.FK_Production_Machines" FromRole="Production" ToRole="Machines" />
+          <NavigationProperty Name="MachineStates" Relationship="Self.FK_Production_MachineStates" FromRole="Production" ToRole="MachineStates" />
+          <NavigationProperty Name="Shifts" Relationship="Self.FK_Production_Shifts" FromRole="Production" ToRole="Shifts" />
+          <NavigationProperty Name="Works" Relationship="Self.FK_Production_Works" FromRole="Production" ToRole="Works" />
+        </EntityType>
+        <EntityType Name="SetUpParts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MachineSetUpParts" Relationship="Self.FK_MachineSetUpParts_SetUpParts" FromRole="SetUpParts" ToRole="MachineSetUpParts" />
+          <NavigationProperty Name="SetUpPartsLog" Relationship="Self.FK_SetUpPartsLog_SetUpParts" FromRole="SetUpParts" ToRole="SetUpPartsLog" />
+        </EntityType>
+        <EntityType Name="SetUpPartsLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkID" Type="Int32" />
+          <Property Name="SetUpPartID" Type="Int32" />
+          <Property Name="Value" Type="Int32" />
+          <NavigationProperty Name="SetUpParts" Relationship="Self.FK_SetUpPartsLog_SetUpParts" FromRole="SetUpPartsLog" ToRole="SetUpParts" />
+          <NavigationProperty Name="Works" Relationship="Self.FK_SetUpPartsLog_Works" FromRole="SetUpPartsLog" ToRole="Works" />
+        </EntityType>
+        <EntityType Name="Shifts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Byte" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Production" Relationship="Self.FK_Production_Shifts" FromRole="Shifts" ToRole="Production" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Workers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkerCode" Type="Int32" />
+          <Property Name="WorkerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Works">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WorkStateID" Type="Int32" />
+          <Property Name="MachineID" Type="Byte" />
+          <Property Name="MachineStateIDProcessingStep" Type="Byte" />
+          <Property Name="ProcessingStepID" Type="Int32" />
+          <Property Name="UnitOfMeasure" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="QuantityMade" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="UnitOfMeasureSecondary" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="QuantitySecondary" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Start" Type="DateTime" Precision="0" />
+          <Property Name="Finish" Type="DateTime" Precision="0" />
+          <Property Name="Waste" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Multipler" Type="Decimal" Precision="6" Scale="3" />
+          <Property Name="Worker" Type="Int32" />
+          <Property Name="Worker2" Type="Int32" />
+          <Property Name="Worker3" Type="Int32" />
+          <Property Name="Mechanic" Type="Int32" />
+          <Property Name="Mechanic2" Type="Int32" />
+          <Property Name="Mechanic3" Type="Int32" />
+          <Property Name="Workers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Counter" Type="Int32" />
+          <Property Name="IsUrgent" Type="Boolean" Nullable="false" />
+          <Property Name="MaterialHeightLeaf" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="MaterialCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MaterialName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaterialHeightLeaf2" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="Multipler2" Type="Decimal" Precision="6" Scale="3" />
+          <Property Name="RealWeightProduction" Type="Decimal" Precision="18" Scale="3" />
+          <NavigationProperty Name="Downtimes" Relationship="Self.FK_Downtimes_Works" FromRole="Works" ToRole="Downtimes" />
+          <NavigationProperty Name="Machines" Relationship="Self.FK_Works_Machines" FromRole="Works" ToRole="Machines" />
+          <NavigationProperty Name="ProcessingSteps" Relationship="Self.FK_Works_ProcessingSteps" FromRole="Works" ToRole="ProcessingSteps" />
+          <NavigationProperty Name="Production" Relationship="Self.FK_Production_Works" FromRole="Works" ToRole="Production" />
+          <NavigationProperty Name="SetUpPartsLog" Relationship="Self.FK_SetUpPartsLog_Works" FromRole="Works" ToRole="SetUpPartsLog" />
+          <NavigationProperty Name="WorkStates" Relationship="Self.FK_Works_WorkStates" FromRole="Works" ToRole="WorkStates" />
+        </EntityType>
+        <EntityType Name="WorkStates">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Works" Relationship="Self.FK_Works_WorkStates" FromRole="WorkStates" ToRole="Works" />
+        </EntityType>
+        <EntityType Name="View_ExportWorks">
+          <Key>
+            <PropertyRef Name="IDLavoro" />
+            <PropertyRef Name="Macchina" />
+            <PropertyRef Name="Fase" />
+          </Key>
+          <Property Name="IDLavoro" Type="Int32" Nullable="false" />
+          <Property Name="Bolla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Macchina" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fase" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UM" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Quantita" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Q_Fatta" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UM2" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Quantita2" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Inizio" Type="DateTime" Precision="0" />
+          <Property Name="Fine" Type="DateTime" Precision="0" />
+          <Property Name="TempoMinuti" Type="Int32" />
+          <Property Name="Scarto" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Cod_Lavoratore" Type="Int32" />
+          <Property Name="NomeFermo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Minuti" Type="Int32" />
+          <Property Name="SetUp" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Q_SetUp" Type="Int32" />
+        </EntityType>
+        <EntityType Name="View_ExportWorks2">
+          <Key>
+            <PropertyRef Name="Macchina" />
+            <PropertyRef Name="Materiale" />
+            <PropertyRef Name="sk" />
+            <PropertyRef Name="colori" />
+            <PropertyRef Name="HF" />
+            <PropertyRef Name="Fase" />
+          </Key>
+          <Property Name="Macchina" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cod_Lavoratore" Type="Int32" />
+          <Property Name="Data" Type="DateTime" Precision="0" />
+          <Property Name="Bolla" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Materiale" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sk" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="colori" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HF" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MT_Richiesti" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MT_Fatti" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="KG_Richiesti" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Kg_Fatti" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="Fase" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Inizio" Type="DateTime" Precision="0" />
+          <Property Name="Fine" Type="DateTime" Precision="0" />
+          <Property Name="TempoMinuti" Type="Int32" />
+          <Property Name="ScartoKg" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ScartoMT" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="NomeFermo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Minuti" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Machines_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Machines" Type="Self.Machines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Machines">
+              <PropertyRef Name="DepartmantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Downtimes_MachineAlarms">
+          <End Role="MachineAlarms" Type="Self.MachineAlarms" Multiplicity="0..1" />
+          <End Role="Downtimes" Type="Self.Downtimes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MachineAlarms">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Downtimes">
+              <PropertyRef Name="MachineAlarmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Downtimes_Machines">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="0..1" />
+          <End Role="Downtimes" Type="Self.Downtimes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Downtimes">
+              <PropertyRef Name="MachineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Downtimes_Works">
+          <End Role="Works" Type="Self.Works" Multiplicity="0..1" />
+          <End Role="Downtimes" Type="Self.Downtimes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Works">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Downtimes">
+              <PropertyRef Name="WorksID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MachinesAlarmsLog_MachineAlarms">
+          <End Role="MachineAlarms" Type="Self.MachineAlarms" Multiplicity="1" />
+          <End Role="MachinesAlarmsLog" Type="Self.MachinesAlarmsLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MachineAlarms">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MachinesAlarmsLog">
+              <PropertyRef Name="MachineAlarmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MachinesAlarmsLog_Machines">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="1" />
+          <End Role="MachinesAlarmsLog" Type="Self.MachinesAlarmsLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MachinesAlarmsLog">
+              <PropertyRef Name="MachineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MachineSetUpParts_Machines">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="0..1" />
+          <End Role="MachineSetUpParts" Type="Self.MachineSetUpParts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MachineSetUpParts">
+              <PropertyRef Name="MachineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MachineStatus_Machines">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="1" />
+          <End Role="MachineStatus" Type="Self.MachineStatus" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MachineStatus">
+              <PropertyRef Name="MachineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcessingSteps_Machines">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="0..1" />
+          <End Role="ProcessingSteps" Type="Self.ProcessingSteps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProcessingSteps">
+              <PropertyRef Name="MachineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Production_Machines">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="0..1" />
+          <End Role="Production" Type="Self.Production" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Production">
+              <PropertyRef Name="MachinesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Works_Machines">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="0..1" />
+          <End Role="Works" Type="Self.Works" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Works">
+              <PropertyRef Name="MachineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MachineSetUpParts_SetUpParts">
+          <End Role="SetUpParts" Type="Self.SetUpParts" Multiplicity="0..1" />
+          <End Role="MachineSetUpParts" Type="Self.MachineSetUpParts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SetUpParts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MachineSetUpParts">
+              <PropertyRef Name="SetUpPartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MachineStatus_MachineStates">
+          <End Role="MachineStates" Type="Self.MachineStates" Multiplicity="0..1" />
+          <End Role="MachineStatus" Type="Self.MachineStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MachineStates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MachineStatus">
+              <PropertyRef Name="MachineStateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcessingSteps_MachineStates">
+          <End Role="MachineStates" Type="Self.MachineStates" Multiplicity="0..1" />
+          <End Role="ProcessingSteps" Type="Self.ProcessingSteps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MachineStates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ProcessingSteps">
+              <PropertyRef Name="MachineStateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Production_MachineStates">
+          <End Role="MachineStates" Type="Self.MachineStates" Multiplicity="0..1" />
+          <End Role="Production" Type="Self.Production" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MachineStates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Production">
+              <PropertyRef Name="MachineStateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Works_ProcessingSteps">
+          <End Role="ProcessingSteps" Type="Self.ProcessingSteps" Multiplicity="0..1" />
+          <End Role="Works" Type="Self.Works" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcessingSteps">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Works">
+              <PropertyRef Name="ProcessingStepID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Production_Shifts">
+          <End Role="Shifts" Type="Self.Shifts" Multiplicity="0..1" />
+          <End Role="Production" Type="Self.Production" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shifts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Production">
+              <PropertyRef Name="ShiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Production_Works">
+          <End Role="Works" Type="Self.Works" Multiplicity="0..1" />
+          <End Role="Production" Type="Self.Production" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Works">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Production">
+              <PropertyRef Name="WorkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SetUpPartsLog_SetUpParts">
+          <End Role="SetUpParts" Type="Self.SetUpParts" Multiplicity="0..1" />
+          <End Role="SetUpPartsLog" Type="Self.SetUpPartsLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SetUpParts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SetUpPartsLog">
+              <PropertyRef Name="SetUpPartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SetUpPartsLog_Works">
+          <End Role="Works" Type="Self.Works" Multiplicity="0..1" />
+          <End Role="SetUpPartsLog" Type="Self.SetUpPartsLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Works">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SetUpPartsLog">
+              <PropertyRef Name="WorkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Works_WorkStates">
+          <End Role="WorkStates" Type="Self.WorkStates" Multiplicity="0..1" />
+          <End Role="Works" Type="Self.Works" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkStates">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Works">
+              <PropertyRef Name="WorkStateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EnoplasticEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AS400ImportData" EntityType="Self.AS400ImportData" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" />
+          <EntitySet Name="Downtimes" EntityType="Self.Downtimes" />
+          <EntitySet Name="General" EntityType="Self.General" />
+          <EntitySet Name="MachineAlarms" EntityType="Self.MachineAlarms" />
+          <EntitySet Name="Machines" EntityType="Self.Machines" />
+          <EntitySet Name="MachinesAlarmsLog" EntityType="Self.MachinesAlarmsLog" />
+          <EntitySet Name="MachineSetUpParts" EntityType="Self.MachineSetUpParts" />
+          <EntitySet Name="MachineStates" EntityType="Self.MachineStates" />
+          <EntitySet Name="MachineStatus" EntityType="Self.MachineStatus" />
+          <EntitySet Name="Materials" EntityType="Self.Materials" />
+          <EntitySet Name="MaterialsWeights" EntityType="Self.MaterialsWeights" />
+          <EntitySet Name="ProcessingSteps" EntityType="Self.ProcessingSteps" />
+          <EntitySet Name="Production" EntityType="Self.Production" />
+          <EntitySet Name="SetUpParts" EntityType="Self.SetUpParts" />
+          <EntitySet Name="SetUpPartsLog" EntityType="Self.SetUpPartsLog" />
+          <EntitySet Name="Shifts" EntityType="Self.Shifts" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Workers" EntityType="Self.Workers" />
+          <EntitySet Name="Works" EntityType="Self.Works" />
+          <EntitySet Name="WorkStates" EntityType="Self.WorkStates" />
+          <EntitySet Name="View_ExportWorks" EntityType="Self.View_ExportWorks" />
+          <EntitySet Name="View_ExportWorks2" EntityType="Self.View_ExportWorks2" />
+          <AssociationSet Name="FK_Machines_Departments" Association="Self.FK_Machines_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Machines" EntitySet="Machines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Downtimes_MachineAlarms" Association="Self.FK_Downtimes_MachineAlarms">
+            <End Role="MachineAlarms" EntitySet="MachineAlarms" />
+            <End Role="Downtimes" EntitySet="Downtimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Downtimes_Machines" Association="Self.FK_Downtimes_Machines">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="Downtimes" EntitySet="Downtimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Downtimes_Works" Association="Self.FK_Downtimes_Works">
+            <End Role="Works" EntitySet="Works" />
+            <End Role="Downtimes" EntitySet="Downtimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MachinesAlarmsLog_MachineAlarms" Association="Self.FK_MachinesAlarmsLog_MachineAlarms">
+            <End Role="MachineAlarms" EntitySet="MachineAlarms" />
+            <End Role="MachinesAlarmsLog" EntitySet="MachinesAlarmsLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MachinesAlarmsLog_Machines" Association="Self.FK_MachinesAlarmsLog_Machines">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="MachinesAlarmsLog" EntitySet="MachinesAlarmsLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MachineSetUpParts_Machines" Association="Self.FK_MachineSetUpParts_Machines">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="MachineSetUpParts" EntitySet="MachineSetUpParts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MachineStatus_Machines" Association="Self.FK_MachineStatus_Machines">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="MachineStatus" EntitySet="MachineStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcessingSteps_Machines" Association="Self.FK_ProcessingSteps_Machines">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="ProcessingSteps" EntitySet="ProcessingSteps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Production_Machines" Association="Self.FK_Production_Machines">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="Production" EntitySet="Production" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Works_Machines" Association="Self.FK_Works_Machines">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="Works" EntitySet="Works" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MachineSetUpParts_SetUpParts" Association="Self.FK_MachineSetUpParts_SetUpParts">
+            <End Role="SetUpParts" EntitySet="SetUpParts" />
+            <End Role="MachineSetUpParts" EntitySet="MachineSetUpParts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MachineStatus_MachineStates" Association="Self.FK_MachineStatus_MachineStates">
+            <End Role="MachineStates" EntitySet="MachineStates" />
+            <End Role="MachineStatus" EntitySet="MachineStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcessingSteps_MachineStates" Association="Self.FK_ProcessingSteps_MachineStates">
+            <End Role="MachineStates" EntitySet="MachineStates" />
+            <End Role="ProcessingSteps" EntitySet="ProcessingSteps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Production_MachineStates" Association="Self.FK_Production_MachineStates">
+            <End Role="MachineStates" EntitySet="MachineStates" />
+            <End Role="Production" EntitySet="Production" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Works_ProcessingSteps" Association="Self.FK_Works_ProcessingSteps">
+            <End Role="ProcessingSteps" EntitySet="ProcessingSteps" />
+            <End Role="Works" EntitySet="Works" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Production_Shifts" Association="Self.FK_Production_Shifts">
+            <End Role="Shifts" EntitySet="Shifts" />
+            <End Role="Production" EntitySet="Production" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Production_Works" Association="Self.FK_Production_Works">
+            <End Role="Works" EntitySet="Works" />
+            <End Role="Production" EntitySet="Production" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SetUpPartsLog_SetUpParts" Association="Self.FK_SetUpPartsLog_SetUpParts">
+            <End Role="SetUpParts" EntitySet="SetUpParts" />
+            <End Role="SetUpPartsLog" EntitySet="SetUpPartsLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SetUpPartsLog_Works" Association="Self.FK_SetUpPartsLog_Works">
+            <End Role="Works" EntitySet="Works" />
+            <End Role="SetUpPartsLog" EntitySet="SetUpPartsLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Works_WorkStates" Association="Self.FK_Works_WorkStates">
+            <End Role="WorkStates" EntitySet="WorkStates" />
+            <End Role="Works" EntitySet="Works" />
+          </AssociationSet>
+          <FunctionImport Name="SP_AggegatedData_Machine" ReturnType="Collection(EnoplasticModel.SP_AggegatedData_Machine_Result)">
+            <Parameter Name="Machine" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_AggegatedDowntimes_Machine_CODE" ReturnType="Collection(EnoplasticModel.SP_AggegatedDowntimes_Machine_CODE_Result)">
+            <Parameter Name="Machine" Mode="In" Type="Int32" />
+            <Parameter Name="Code" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_AggegatedPhase_Machine_CODE" ReturnType="Collection(EnoplasticModel.SP_AggegatedPhase_Machine_CODE_Result)">
+            <Parameter Name="Machine" Mode="In" Type="Int32" />
+            <Parameter Name="Code" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_AggegatedSetUpLog_Machine_CODE" ReturnType="Collection(EnoplasticModel.SP_AggegatedSetUpLog_Machine_CODE_Result)">
+            <Parameter Name="Machine" Mode="In" Type="Int32" />
+            <Parameter Name="Code" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_AggegatedWorks_Machine" ReturnType="Collection(EnoplasticModel.SP_AggegatedWorks_Machine_Result)">
+            <Parameter Name="Machine" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GraphicProduction_GroupBy_Machines" ReturnType="Collection(EnoplasticModel.SP_GraphicProduction_GroupBy_Machines_Result)">
+            <Parameter Name="GroupBy" Mode="In" Type="String" />
+            <Parameter Name="Machine" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(EnoplasticModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(EnoplasticModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_InsertNewProduction" />
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ReportWorks_StartDate_EndDate" ReturnType="Collection(EnoplasticModel.SP_ReportWorks_StartDate_EndDate_Result)">
+            <Parameter Name="startDate" Mode="In" Type="DateTime" />
+            <Parameter Name="endDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ReportWorks_StartDate_EndDate_MachineID" ReturnType="Collection(EnoplasticModel.SP_ReportWorks_StartDate_EndDate_MachineID_Result)">
+            <Parameter Name="startDate" Mode="In" Type="DateTime" />
+            <Parameter Name="endDate" Mode="In" Type="DateTime" />
+            <Parameter Name="machineID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ReportWorks2_StartDate_EndDate" ReturnType="Collection(EnoplasticModel.SP_ReportWorks2_StartDate_EndDate_Result)">
+            <Parameter Name="startDate" Mode="In" Type="DateTime" />
+            <Parameter Name="endDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="SP_AggegatedData_Machine_Result">
+          <Property Type="Int32" Name="CodiceBolla" Nullable="true" />
+          <Property Type="DateTime" Name="InizioAttrezzaggio" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="FineAttrezzaggio" Nullable="true" Precision="16" />
+          <Property Type="Int32" Name="PezziAttrezzaggio" Nullable="true" />
+          <Property Type="DateTime" Name="DataInizio" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="DataFine" Nullable="true" Precision="16" />
+          <Property Type="Int32" Name="PezziProdotti" Nullable="true" />
+          <Property Type="Int32" Name="Media" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_AggegatedDowntimes_Machine_CODE_Result">
+          <Property Type="String" Name="MachineAlarmName" Nullable="true" />
+          <Property Type="Int32" Name="MinutesDowntime" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_AggegatedPhase_Machine_CODE_Result">
+          <Property Type="String" Name="Name" Nullable="false" />
+          <Property Type="Int32" Name="TotalTimeMinutes" Nullable="true" />
+          <Property Type="Decimal" Name="Waste" Nullable="true" Precision="38" Scale="3" />
+        </ComplexType>
+        <ComplexType Name="SP_AggegatedSetUpLog_Machine_CODE_Result">
+          <Property Type="String" Name="SetUpDescription" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_AggegatedWorks_Machine_Result">
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Quantity" Nullable="true" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="QuantityMade" Nullable="true" Precision="38" Scale="3" />
+          <Property Type="Decimal" Name="Waste" Nullable="true" Precision="38" Scale="3" />
+          <Property Type="String" Name="UM" Nullable="true" MaxLength="5" />
+          <Property Type="DateTime" Name="Start" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="Finish" Nullable="true" Precision="16" />
+          <Property Type="Int32" Name="TotalTimeMinutes" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_GraphicProduction_GroupBy_Machines_Result">
+          <Property Type="DateTime" Name="DateTimeProduction" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="AvarageItems" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_ReportWorks_StartDate_EndDate_Result">
+          <Property Type="Int32" Name="IDLavoro" Nullable="false" />
+          <Property Type="String" Name="Bolla" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Macchina" Nullable="false" />
+          <Property Type="String" Name="Fase" Nullable="false" />
+          <Property Type="String" Name="UM" Nullable="true" MaxLength="5" />
+          <Property Type="Decimal" Name="Quantita" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="Q_Fatta" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="UM2" Nullable="true" MaxLength="5" />
+          <Property Type="Decimal" Name="Quantita2" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="DateTime" Name="Inizio" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="Fine" Nullable="true" Precision="16" />
+          <Property Type="Int32" Name="TempoMinuti" Nullable="true" />
+          <Property Type="Decimal" Name="Scarto" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="Cod_Lavoratore" Nullable="true" />
+          <Property Type="String" Name="NomeFermo" Nullable="true" />
+          <Property Type="Int32" Name="Minuti" Nullable="true" />
+          <Property Type="String" Name="SetUp" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Q_SetUp" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ReportWorks_StartDate_EndDate_MachineID_Result">
+          <Property Type="String" Name="Macchina" Nullable="false" />
+          <Property Type="String" Name="Operatore" Nullable="false" MaxLength="329" />
+          <Property Type="String" Name="DataTurno" Nullable="true" MaxLength="54" />
+          <Property Type="String" Name="Bolla" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Materiale" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="HF" Nullable="true" Precision="18" Scale="3" />
+          <Property Type="Decimal" Name="KgRichiesti" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="MtRichiesti" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="KgFatti" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="Decimal" Name="MtFatti" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="KgRilevati" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="Fase" Nullable="false" />
+          <Property Type="DateTime" Name="InizioFase" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="FineFase" Nullable="true" Precision="16" />
+          <Property Type="Int32" Name="MinutiFase" Nullable="true" />
+          <Property Type="Decimal" Name="ScartoKg" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="ScartoMT" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="String" Name="NomeFermo" Nullable="true" />
+          <Property Type="Int32" Name="Minuti" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ReportWorks2_StartDate_EndDate_Result">
+          <Property Type="String" Name="Macchina" Nullable="false" />
+          <Property Type="Int32" Name="Cod_Lavoratore" Nullable="true" />
+          <Property Type="DateTime" Name="Data" Nullable="true" Precision="16" />
+          <Property Type="String" Name="Bolla" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Materiale" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="sk" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="colori" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="HF" Nullable="false" MaxLength="1" />
+          <Property Type="Decimal" Name="MT_Richiesti" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="MT_Fatti" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="KG_Richiesti" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="Kg_Fatti" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="String" Name="Fase" Nullable="false" />
+          <Property Type="DateTime" Name="Inizio" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="Fine" Nullable="true" Precision="16" />
+          <Property Type="Int32" Name="TempoMinuti" Nullable="true" />
+          <Property Type="Decimal" Name="ScartoKg" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="ScartoMT" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="String" Name="NomeFermo" Nullable="true" />
+          <Property Type="Int32" Name="Minuti" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EnoplasticModelStoreContainer" CdmEntityContainer="EnoplasticEntities">
+          <EntitySetMapping Name="AS400ImportData">
+            <EntityTypeMapping TypeName="EnoplasticModel.AS400ImportData">
+              <MappingFragment StoreEntitySet="AS400ImportData">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+                <ScalarProperty Name="MaterialHeightLeaf" ColumnName="MaterialHeightLeaf" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="QuantitySecondary" ColumnName="QuantitySecondary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="EnoplasticModel.Departments">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Downtimes">
+            <EntityTypeMapping TypeName="EnoplasticModel.Downtimes">
+              <MappingFragment StoreEntitySet="Downtimes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="WorksID" ColumnName="WorksID" />
+                <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+                <ScalarProperty Name="MachineAlarmID" ColumnName="MachineAlarmID" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="Minutes" ColumnName="Minutes" />
+                <ScalarProperty Name="Worker" ColumnName="Worker" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="General">
+            <EntityTypeMapping TypeName="EnoplasticModel.General">
+              <MappingFragment StoreEntitySet="General">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KeyDescription" ColumnName="KeyDescription" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MachineAlarms">
+            <EntityTypeMapping TypeName="EnoplasticModel.MachineAlarms">
+              <MappingFragment StoreEntitySet="MachineAlarms">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Machines">
+            <EntityTypeMapping TypeName="EnoplasticModel.Machines">
+              <MappingFragment StoreEntitySet="Machines">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsDisable" ColumnName="IsDisable" />
+                <ScalarProperty Name="DepartmantID" ColumnName="DepartmantID" />
+                <ScalarProperty Name="Multipler" ColumnName="Multipler" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MachinesAlarmsLog">
+            <EntityTypeMapping TypeName="EnoplasticModel.MachinesAlarmsLog">
+              <MappingFragment StoreEntitySet="MachinesAlarmsLog">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+                <ScalarProperty Name="MachineAlarmID" ColumnName="MachineAlarmID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MachineSetUpParts">
+            <EntityTypeMapping TypeName="EnoplasticModel.MachineSetUpParts">
+              <MappingFragment StoreEntitySet="MachineSetUpParts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+                <ScalarProperty Name="SetUpPartID" ColumnName="SetUpPartID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MachineStates">
+            <EntityTypeMapping TypeName="EnoplasticModel.MachineStates">
+              <MappingFragment StoreEntitySet="MachineStates">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="ColorCode" ColumnName="ColorCode" />
+                <ScalarProperty Name="HideSpeed" ColumnName="HideSpeed" />
+                <ScalarProperty Name="HideAverageSpeed" ColumnName="HideAverageSpeed" />
+                <ScalarProperty Name="IsOutWorkPermitted" ColumnName="IsOutWorkPermitted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MachineStatus">
+            <EntityTypeMapping TypeName="EnoplasticModel.MachineStatus">
+              <MappingFragment StoreEntitySet="MachineStatus">
+                <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+                <ScalarProperty Name="WorkID" ColumnName="WorkID" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="MachineStateID" ColumnName="MachineStateID" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="AverageSpeed" ColumnName="AverageSpeed" />
+                <ScalarProperty Name="Counter" ColumnName="Counter" />
+                <ScalarProperty Name="ResettableCounter" ColumnName="ResettableCounter" />
+                <ScalarProperty Name="ErrorsString" ColumnName="ErrorsString" />
+                <ScalarProperty Name="StartPhase" ColumnName="StartPhase" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materials">
+            <EntityTypeMapping TypeName="EnoplasticModel.Materials">
+              <MappingFragment StoreEntitySet="Materials">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="HeightLeaf" ColumnName="HeightLeaf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialsWeights">
+            <EntityTypeMapping TypeName="EnoplasticModel.MaterialsWeights">
+              <MappingFragment StoreEntitySet="MaterialsWeights">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MateriaMasterCode" ColumnName="MateriaMasterCode" />
+                <ScalarProperty Name="MaterialDescription" ColumnName="MaterialDescription" />
+                <ScalarProperty Name="MaterialSubCode" ColumnName="MaterialSubCode" />
+                <ScalarProperty Name="WeightKgMq" ColumnName="WeightKgMq" />
+                <ScalarProperty Name="ComboView" ColumnName="ComboView" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProcessingSteps">
+            <EntityTypeMapping TypeName="EnoplasticModel.ProcessingSteps">
+              <MappingFragment StoreEntitySet="ProcessingSteps">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+                <ScalarProperty Name="PhaseNumber" ColumnName="PhaseNumber" />
+                <ScalarProperty Name="MachineStateID" ColumnName="MachineStateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Production">
+            <EntityTypeMapping TypeName="EnoplasticModel.Production">
+              <MappingFragment StoreEntitySet="Production">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MachinesID" ColumnName="MachinesID" />
+                <ScalarProperty Name="WorkID" ColumnName="WorkID" />
+                <ScalarProperty Name="DateTimeProduction" ColumnName="DateTimeProduction" />
+                <ScalarProperty Name="Items" ColumnName="Items" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="Counter" ColumnName="Counter" />
+                <ScalarProperty Name="MachineStateID" ColumnName="MachineStateID" />
+                <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
+                <ScalarProperty Name="DateProduction" ColumnName="DateProduction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SetUpParts">
+            <EntityTypeMapping TypeName="EnoplasticModel.SetUpParts">
+              <MappingFragment StoreEntitySet="SetUpParts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SetUpPartsLog">
+            <EntityTypeMapping TypeName="EnoplasticModel.SetUpPartsLog">
+              <MappingFragment StoreEntitySet="SetUpPartsLog">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="WorkID" ColumnName="WorkID" />
+                <ScalarProperty Name="SetUpPartID" ColumnName="SetUpPartID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shifts">
+            <EntityTypeMapping TypeName="EnoplasticModel.Shifts">
+              <MappingFragment StoreEntitySet="Shifts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="EnoplasticModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workers">
+            <EntityTypeMapping TypeName="EnoplasticModel.Workers">
+              <MappingFragment StoreEntitySet="Workers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="WorkerCode" ColumnName="WorkerCode" />
+                <ScalarProperty Name="WorkerName" ColumnName="WorkerName" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Works">
+            <EntityTypeMapping TypeName="EnoplasticModel.Works">
+              <MappingFragment StoreEntitySet="Works">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="WorkStateID" ColumnName="WorkStateID" />
+                <ScalarProperty Name="MachineID" ColumnName="MachineID" />
+                <ScalarProperty Name="MachineStateIDProcessingStep" ColumnName="MachineStateIDProcessingStep" />
+                <ScalarProperty Name="ProcessingStepID" ColumnName="ProcessingStepID" />
+                <ScalarProperty Name="UnitOfMeasure" ColumnName="UnitOfMeasure" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="QuantityMade" ColumnName="QuantityMade" />
+                <ScalarProperty Name="UnitOfMeasureSecondary" ColumnName="UnitOfMeasureSecondary" />
+                <ScalarProperty Name="QuantitySecondary" ColumnName="QuantitySecondary" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="Finish" ColumnName="Finish" />
+                <ScalarProperty Name="Waste" ColumnName="Waste" />
+                <ScalarProperty Name="Multipler" ColumnName="Multipler" />
+                <ScalarProperty Name="Worker" ColumnName="Worker" />
+                <ScalarProperty Name="Worker2" ColumnName="Worker2" />
+                <ScalarProperty Name="Worker3" ColumnName="Worker3" />
+                <ScalarProperty Name="Mechanic" ColumnName="Mechanic" />
+                <ScalarProperty Name="Mechanic2" ColumnName="Mechanic2" />
+                <ScalarProperty Name="Mechanic3" ColumnName="Mechanic3" />
+                <ScalarProperty Name="Workers" ColumnName="Workers" />
+                <ScalarProperty Name="Counter" ColumnName="Counter" />
+                <ScalarProperty Name="IsUrgent" ColumnName="IsUrgent" />
+                <ScalarProperty Name="MaterialHeightLeaf" ColumnName="MaterialHeightLeaf" />
+                <ScalarProperty Name="MaterialCode" ColumnName="MaterialCode" />
+                <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+                <ScalarProperty Name="MaterialHeightLeaf2" ColumnName="MaterialHeightLeaf2" />
+                <ScalarProperty Name="Multipler2" ColumnName="Multipler2" />
+                <ScalarProperty Name="RealWeightProduction" ColumnName="RealWeightProduction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkStates">
+            <EntityTypeMapping TypeName="EnoplasticModel.WorkStates">
+              <MappingFragment StoreEntitySet="WorkStates">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_ExportWorks">
+            <EntityTypeMapping TypeName="EnoplasticModel.View_ExportWorks">
+              <MappingFragment StoreEntitySet="View_ExportWorks">
+                <ScalarProperty Name="IDLavoro" ColumnName="IDLavoro" />
+                <ScalarProperty Name="Bolla" ColumnName="Bolla" />
+                <ScalarProperty Name="Macchina" ColumnName="Macchina" />
+                <ScalarProperty Name="Fase" ColumnName="Fase" />
+                <ScalarProperty Name="UM" ColumnName="UM" />
+                <ScalarProperty Name="Quantita" ColumnName="Quantita" />
+                <ScalarProperty Name="Q_Fatta" ColumnName="Q.Fatta" />
+                <ScalarProperty Name="UM2" ColumnName="UM2" />
+                <ScalarProperty Name="Quantita2" ColumnName="Quantita2" />
+                <ScalarProperty Name="Inizio" ColumnName="Inizio" />
+                <ScalarProperty Name="Fine" ColumnName="Fine" />
+                <ScalarProperty Name="TempoMinuti" ColumnName="TempoMinuti" />
+                <ScalarProperty Name="Scarto" ColumnName="Scarto" />
+                <ScalarProperty Name="Cod_Lavoratore" ColumnName="Cod.Lavoratore" />
+                <ScalarProperty Name="NomeFermo" ColumnName="NomeFermo" />
+                <ScalarProperty Name="Minuti" ColumnName="Minuti" />
+                <ScalarProperty Name="SetUp" ColumnName="SetUp" />
+                <ScalarProperty Name="Q_SetUp" ColumnName="Q.SetUp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_ExportWorks2">
+            <EntityTypeMapping TypeName="EnoplasticModel.View_ExportWorks2">
+              <MappingFragment StoreEntitySet="View_ExportWorks2">
+                <ScalarProperty Name="Macchina" ColumnName="Macchina" />
+                <ScalarProperty Name="Cod_Lavoratore" ColumnName="Cod.Lavoratore" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Bolla" ColumnName="Bolla" />
+                <ScalarProperty Name="Materiale" ColumnName="Materiale" />
+                <ScalarProperty Name="sk" ColumnName="sk" />
+                <ScalarProperty Name="colori" ColumnName="colori" />
+                <ScalarProperty Name="HF" ColumnName="HF" />
+                <ScalarProperty Name="MT_Richiesti" ColumnName="MT Richiesti" />
+                <ScalarProperty Name="MT_Fatti" ColumnName="MT Fatti" />
+                <ScalarProperty Name="KG_Richiesti" ColumnName="KG Richiesti" />
+                <ScalarProperty Name="Kg_Fatti" ColumnName="Kg Fatti" />
+                <ScalarProperty Name="Fase" ColumnName="Fase" />
+                <ScalarProperty Name="Inizio" ColumnName="Inizio" />
+                <ScalarProperty Name="Fine" ColumnName="Fine" />
+                <ScalarProperty Name="TempoMinuti" ColumnName="TempoMinuti" />
+                <ScalarProperty Name="ScartoKg" ColumnName="ScartoKg" />
+                <ScalarProperty Name="ScartoMT" ColumnName="ScartoMT" />
+                <ScalarProperty Name="NomeFermo" ColumnName="NomeFermo" />
+                <ScalarProperty Name="Minuti" ColumnName="Minuti" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_AggegatedData_Machine" FunctionName="EnoplasticModel.Store.SP_AggegatedData_Machine">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnoplasticModel.SP_AggegatedData_Machine_Result">
+                <ScalarProperty Name="CodiceBolla" ColumnName="CodiceBolla" />
+                <ScalarProperty Name="InizioAttrezzaggio" ColumnName="InizioAttrezzaggio" />
+                <ScalarProperty Name="FineAttrezzaggio" ColumnName="FineAttrezzaggio" />
+                <ScalarProperty Name="PezziAttrezzaggio" ColumnName="PezziAttrezzaggio" />
+                <ScalarProperty Name="DataInizio" ColumnName="DataInizio" />
+                <ScalarProperty Name="DataFine" ColumnName="DataFine" />
+                <ScalarProperty Name="PezziProdotti" ColumnName="PezziProdotti" />
+                <ScalarProperty Name="Media" ColumnName="Media" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_AggegatedDowntimes_Machine_CODE" FunctionName="EnoplasticModel.Store.SP_AggegatedDowntimes_Machine_CODE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnoplasticModel.SP_AggegatedDowntimes_Machine_CODE_Result">
+                <ScalarProperty Name="MachineAlarmName" ColumnName="MachineAlarmName" />
+                <ScalarProperty Name="MinutesDowntime" ColumnName="MinutesDowntime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_AggegatedPhase_Machine_CODE" FunctionName="EnoplasticModel.Store.SP_AggegatedPhase_Machine_CODE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnoplasticModel.SP_AggegatedPhase_Machine_CODE_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TotalTimeMinutes" ColumnName="TotalTimeMinutes" />
+                <ScalarProperty Name="Waste" ColumnName="Waste" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_AggegatedSetUpLog_Machine_CODE" FunctionName="EnoplasticModel.Store.SP_AggegatedSetUpLog_Machine_CODE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnoplasticModel.SP_AggegatedSetUpLog_Machine_CODE_Result">
+                <ScalarProperty Name="SetUpDescription" ColumnName="SetUpDescription" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_AggegatedWorks_Machine" FunctionName="EnoplasticModel.Store.SP_AggegatedWorks_Machine">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnoplasticModel.SP_AggegatedWorks_Machine_Result">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="QuantityMade" ColumnName="QuantityMade" />
+                <ScalarProperty Name="Waste" ColumnName="Waste" />
+                <ScalarProperty Name="UM" ColumnName="UM" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="Finish" ColumnName="Finish" />
+                <ScalarProperty Name="TotalTimeMinutes" ColumnName="TotalTimeMinutes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="EnoplasticModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="EnoplasticModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="EnoplasticModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="SP_GraphicProduction_GroupBy_Machines" FunctionName="EnoplasticModel.Store.SP_GraphicProduction_GroupBy_Machines">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnoplasticModel.SP_GraphicProduction_GroupBy_Machines_Result">
+                <ScalarProperty Name="DateTimeProduction" ColumnName="DateTimeProduction" />
+                <ScalarProperty Name="AvarageItems" ColumnName="AvarageItems" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="EnoplasticModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnoplasticModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="EnoplasticModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnoplasticModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_InsertNewProduction" FunctionName="EnoplasticModel.Store.SP_InsertNewProduction" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="EnoplasticModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="SP_ReportWorks_StartDate_EndDate" FunctionName="EnoplasticModel.Store.SP_ReportWorks_StartDate_EndDate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnoplasticModel.SP_ReportWorks_StartDate_EndDate_Result">
+                <ScalarProperty Name="IDLavoro" ColumnName="IDLavoro" />
+                <ScalarProperty Name="Bolla" ColumnName="Bolla" />
+                <ScalarProperty Name="Macchina" ColumnName="Macchina" />
+                <ScalarProperty Name="Fase" ColumnName="Fase" />
+                <ScalarProperty Name="UM" ColumnName="UM" />
+                <ScalarProperty Name="Quantita" ColumnName="Quantita" />
+                <ScalarProperty Name="Q_Fatta" ColumnName="Q.Fatta" />
+                <ScalarProperty Name="UM2" ColumnName="UM2" />
+                <ScalarProperty Name="Quantita2" ColumnName="Quantita2" />
+                <ScalarProperty Name="Inizio" ColumnName="Inizio" />
+                <ScalarProperty Name="Fine" ColumnName="Fine" />
+                <ScalarProperty Name="TempoMinuti" ColumnName="TempoMinuti" />
+                <ScalarProperty Name="Scarto" ColumnName="Scarto" />
+                <ScalarProperty Name="Cod_Lavoratore" ColumnName="Cod.Lavoratore" />
+                <ScalarProperty Name="NomeFermo" ColumnName="NomeFermo" />
+                <ScalarProperty Name="Minuti" ColumnName="Minuti" />
+                <ScalarProperty Name="SetUp" ColumnName="SetUp" />
+                <ScalarProperty Name="Q_SetUp" ColumnName="Q.SetUp" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ReportWorks_StartDate_EndDate_MachineID" FunctionName="EnoplasticModel.Store.SP_ReportWorks_StartDate_EndDate_MachineID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnoplasticModel.SP_ReportWorks_StartDate_EndDate_MachineID_Result">
+                <ScalarProperty Name="Macchina" ColumnName="Macchina" />
+                <ScalarProperty Name="Operatore" ColumnName="Operatore" />
+                <ScalarProperty Name="DataTurno" ColumnName="DataTurno" />
+                <ScalarProperty Name="Bolla" ColumnName="Bolla" />
+                <ScalarProperty Name="Materiale" ColumnName="Materiale" />
+                <ScalarProperty Name="HF" ColumnName="HF" />
+                <ScalarProperty Name="KgRichiesti" ColumnName="KgRichiesti" />
+                <ScalarProperty Name="MtRichiesti" ColumnName="MtRichiesti" />
+                <ScalarProperty Name="KgFatti" ColumnName="KgFatti" />
+                <ScalarProperty Name="MtFatti" ColumnName="MtFatti" />
+                <ScalarProperty Name="KgRilevati" ColumnName="KgRilevati" />
+                <ScalarProperty Name="Fase" ColumnName="Fase" />
+                <ScalarProperty Name="InizioFase" ColumnName="InizioFase" />
+                <ScalarProperty Name="FineFase" ColumnName="FineFase" />
+                <ScalarProperty Name="MinutiFase" ColumnName="MinutiFase" />
+                <ScalarProperty Name="ScartoKg" ColumnName="ScartoKg" />
+                <ScalarProperty Name="ScartoMT" ColumnName="ScartoMT" />
+                <ScalarProperty Name="NomeFermo" ColumnName="NomeFermo" />
+                <ScalarProperty Name="Minuti" ColumnName="Minuti" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ReportWorks2_StartDate_EndDate" FunctionName="EnoplasticModel.Store.SP_ReportWorks2_StartDate_EndDate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnoplasticModel.SP_ReportWorks2_StartDate_EndDate_Result">
+                <ScalarProperty Name="Macchina" ColumnName="Macchina" />
+                <ScalarProperty Name="Cod_Lavoratore" ColumnName="Cod.Lavoratore" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Bolla" ColumnName="Bolla" />
+                <ScalarProperty Name="Materiale" ColumnName="Materiale" />
+                <ScalarProperty Name="sk" ColumnName="sk" />
+                <ScalarProperty Name="colori" ColumnName="colori" />
+                <ScalarProperty Name="HF" ColumnName="HF" />
+                <ScalarProperty Name="MT_Richiesti" ColumnName="MT Richiesti" />
+                <ScalarProperty Name="MT_Fatti" ColumnName="MT Fatti" />
+                <ScalarProperty Name="KG_Richiesti" ColumnName="KG Richiesti" />
+                <ScalarProperty Name="Kg_Fatti" ColumnName="Kg Fatti" />
+                <ScalarProperty Name="Fase" ColumnName="Fase" />
+                <ScalarProperty Name="Inizio" ColumnName="Inizio" />
+                <ScalarProperty Name="Fine" ColumnName="Fine" />
+                <ScalarProperty Name="TempoMinuti" ColumnName="TempoMinuti" />
+                <ScalarProperty Name="ScartoKg" ColumnName="ScartoKg" />
+                <ScalarProperty Name="ScartoMT" ColumnName="ScartoMT" />
+                <ScalarProperty Name="NomeFermo" ColumnName="NomeFermo" />
+                <ScalarProperty Name="Minuti" ColumnName="Minuti" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="EnoplasticModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

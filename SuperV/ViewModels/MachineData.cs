@@ -13,7 +13,7 @@ namespace SuperV.ViewModels
         public string WorkOperation { get; set; }
         public int TotalCount { get; set; }
         public int Speed { get; set; }
-        public int Status { get; set; }
+        public byte Status { get; set; }
         public string BackgroundClass
         {
             get
@@ -22,11 +22,21 @@ namespace SuperV.ViewModels
                 {
                    
                     case 0:
-                        return Constants.BG_COLOR_WORKING_STATUS;
+                        return Constants.BG_COLOR_DISCONNECTED ;
                     case 1:
-                        return Constants.BG_COLOR_STOPPED_STATUS;
+                        return Constants.BG_COLOR_EMERGENCY;
                     case 2:
-                        return Constants.BG_COLOR_CHANGE_STATUS;
+                        return Constants.BG_COLOR_ALARM ;
+                    case 3:
+                        return Constants.BG_COLOR_RUN;
+                    case 4:
+                        return Constants.BG_COLOR_RUN_ALARM;
+                    case 5:
+                        return Constants.BG_COLOR_STOPPED_STATUS;
+                    case 6:
+                        return Constants.BG_COLOR_SETUP;
+                    case 7:
+                        return Constants.BG_COLOR_STARTUP;
                     default:
                         return string.Empty;
                 }
@@ -39,11 +49,21 @@ namespace SuperV.ViewModels
                 switch (this.Status)
                 {
                     case 0:
-                        return Constants.BG_COLOR_WORKING_STATUS_STRIPE;
+                        return Constants.BG_COLOR_DISCONNECTED_STRIPE;
                     case 1:
-                        return Constants.BG_COLOR_STOPPED_STATUS_STRIPE;
+                        return Constants.BG_COLOR_EMERGENCY_STRIPE ;
                     case 2:
-                        return Constants.BG_COLOR_CHANGE_STATUS_STRIPE;
+                        return Constants.BG_COLOR_ALARM_STRIPE ;
+                    case 3:
+                        return Constants.BG_COLOR_RUN_STRIPE;
+                    case 4:
+                        return Constants.BG_COLOR_RUN_ALARM_STRIPE;
+                    case 5:
+                        return Constants.BG_COLOR_STOPPED_STATUS_STRIPE;
+                    case 6:
+                        return Constants.BG_COLOR_SETUP_STRIPE;
+                    case 7:
+                        return Constants.BG_COLOR_STARTUP_STRIPE;
                     default:
                         return string.Empty;
                 }

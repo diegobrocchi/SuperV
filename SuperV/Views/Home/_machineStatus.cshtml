@@ -1,41 +1,43 @@
 ﻿@model SuperV.ViewModels.MachineData
 
-<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 padding-2 ">
-    <div class="well well-machine @Model.BackgroundClass">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="machine-name">
-                    @Model.MachineName
+<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 padding-2  anchorNoStyle  ">
+    <a href="@Url.Action("machineDetails", "home", new {@ID = Model.MachineID })" >
+        <div class="well well-machine @Model.BackgroundClass">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="machine-name">
+                        @Model.MachineName
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 @Model.BackgroundStripeClass">
+                    <div class="machine-speed">
+                        @Model.Speed
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 @Model.BackgroundStripeClass">
+                    <div class="machine-speed-label">
+                        Velocità
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="machine-operation">
+                        @Model.WorkOperation
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="machine-productCode">
+                        @Model.ProductCode
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 @Model.BackgroundStripeClass">
-                <div class="machine-speed">
-                    @Model.Speed 
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 @Model.BackgroundStripeClass">
-                <div class="machine-speed-label">
-                    Velocità
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="machine-operation">
-                    @Model.WorkOperation
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="machine-productCode">
-                    @Model.ProductCode 
-                </div>
-            </div>
-        </div>
-    </div>
+    </a>
 </div>

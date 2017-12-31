@@ -8,9 +8,9 @@ namespace SuperVCore.Models
 {
     public  class UpsertMachineStatus
     {
-        public int MachineID { get; set; }
+        public byte MachineID { get; set; }
         public int Counter { get; set; }
-        public int MachineStatus { get; set; }
+        public byte MachineStatus { get; set; }
         public int Speed { get; set; }
         public string ProductCode { get; set; }
         public int AverageSpeed  { get; set; }

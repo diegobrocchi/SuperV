@@ -14,13 +14,19 @@ namespace SuperVCore.Context
     
     public partial class MachineStatus
     {
-        public int MachineID { get; set; }
+        public byte MachineID { get; set; }
+        public Nullable<int> WorkID { get; set; }
         public string ProductCode { get; set; }
-        public int MachineStateID { get; set; }
-        public int Speed { get; set; }
-        public int AverageSpeed { get; set; }
-        public int Counter { get; set; }
-        public int ResettableCounter { get; set; }
-        public string ErrorString { get; set; }
+        public Nullable<byte> MachineStateID { get; set; }
+        public Nullable<int> Speed { get; set; }
+        public Nullable<int> AverageSpeed { get; set; }
+        public Nullable<int> Counter { get; set; }
+        public Nullable<int> ResettableCounter { get; set; }
+        public string ErrorsString { get; set; }
+        public Nullable<System.DateTime> StartPhase { get; set; }
+        public Nullable<System.DateTime> LastUpdate { get; set; }
+    
+        public virtual Machines Machines { get; set; }
+        public virtual MachineStates MachineStates { get; set; }
     }
 }

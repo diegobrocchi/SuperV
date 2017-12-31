@@ -30,6 +30,9 @@ namespace SuperV
                 "~/Scripts/signalR_loader.js",
                 "~/Scripts/signalR_functions.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/panel").Include(
+                       "~/Scripts/panel.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/sb-admin.css",
