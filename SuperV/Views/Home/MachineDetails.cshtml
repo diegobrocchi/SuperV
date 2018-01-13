@@ -1,24 +1,46 @@
-﻿
+﻿@model SuperV.ViewModels.MachineDataDetailsVM
 @{
     ViewBag.Title = "MachineDetails";
 }
 
 <style>
-    #ajaxSpinnerContainer {
-        height: 11px;
-    }
-
-    #ajaxSpinnerImage {
-        display: none;
+    body{
+        color:#ffffff;
     }
 </style>
-
 <h2>MachineDetails</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>start</th>
+            <th>finish</th>
+            <th>Code</th>
+            <th>Minutes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.WorkItems)
+        {
+            <tr>
+                <td>@item.Start</td>
+                <td>@item.Finish</td>
+                <td>@item.Code</td>
+                <td>@item.Minutes</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
 
 <h1 id="ID" onclick="load(@ViewBag.ID)">@ViewBag.ID</h1>
 <div id="qui" >
 
+   @Html.Partial("_GridViewPartial", Model.WorkItems )
+
 </div>
+
+
 <script type="text/javascript">
    
 

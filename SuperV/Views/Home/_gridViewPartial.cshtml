@@ -1,0 +1,9 @@
+﻿@Html.DevExpress().GridView(settings =>
+{
+    settings.Name = "MyGV";
+    settings.CallbackRouteValues = new { Controller = "home", Action = "gridViewPartial" };
+    settings.Width =  System.Web.UI.WebControls.Unit.Percentage(90);
+    settings.Columns.Add("Code");
+    settings.Columns.Add("Minutes");
+
+}).Bind(Model).GetHtml()

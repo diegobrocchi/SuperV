@@ -7,6 +7,25 @@
     <title>@ViewBag.Title - SuperV Web</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/signalr")
+    @Scripts.Render("~/bundles/panel")
+
+    @Html.DevExpress().GetStyleSheets(
+        new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.PivotGrid },
+        new StyleSheet { ExtensionSuite = ExtensionSuite.GridView }
+    )
+    @Html.DevExpress().GetScripts(
+        new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+        new Script { ExtensionSuite = ExtensionSuite.PivotGrid },
+        new Script { ExtensionSuite = ExtensionSuite.GridView }
+    )
+
+
+    @RenderSection("scripts", required: false)
+
 
 </head>
 <body>
@@ -32,14 +51,12 @@
         @RenderBody()
     </div>
 
-    <div id="overlay">
+    <div id="overlay" >
         <img src="~/content/images/252.gif" alt="Loading" width="100" /><br />
         Loading...
     </div>
     
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/signalr")
-    @RenderSection("scripts", required: false)
+   
+    
 </body>
 </html>
