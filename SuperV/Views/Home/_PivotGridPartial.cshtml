@@ -1,0 +1,54 @@
+@Html.DevExpress().PivotGrid(settings => {
+    settings.Name = "PivotGrid";
+    settings.CallbackRouteValues = new { Controller = "Home",
+        Action = "PivotGridPartial",
+        @ID =ViewData["ID"] ,
+        @Status = ViewData["Status"],
+        @From = ViewData["From"],
+        @To = ViewData["To"]};
+    settings.OptionsData.DataProcessingEngine = PivotDataProcessingEngine.LegacyOptimized;
+
+    settings.OptionsPager.Position = System.Web.UI.WebControls.PagerPosition.Bottom;
+
+    settings.Fields.Add(field => {
+        field.Area = PivotArea.RowArea ;
+        field.FieldName = "Code";
+        field.Caption = "Code";
+    });
+
+    settings.Fields.Add(field => {
+        field.Area = PivotArea.RowArea ;
+        field.FieldName = "Quantity";
+        field.Caption = "Quantity";
+    });
+    settings.Fields.Add(field => {
+        field.Area = PivotArea.RowArea;
+        field.FieldName = "QuantityMade";
+        field.Caption = "QuantityMade";
+    });
+    settings.Fields.Add(field => {
+        field.Area = PivotArea.RowArea;
+        field.FieldName = "QuantityWasted";
+        field.Caption = "QuantityWasted";
+    });
+    settings.Fields.Add(field => {
+        field.Area = PivotArea.RowArea;
+        field.FieldName = "UM";
+        field.Caption = "UM";
+    });
+    settings.Fields.Add(field => {
+        field.Area = PivotArea.RowArea;
+        field.FieldName = "Start";
+        field.Caption = "Start";
+    });
+    settings.Fields.Add(field => {
+        field.Area = PivotArea.RowArea;
+        field.FieldName = "Finish";
+        field.Caption = "Finish";
+    });
+    settings.Fields.Add(field => {
+        field.Area = PivotArea.DataArea ;
+        field.FieldName = "Minutes";
+        field.Caption = "Minutes";
+    });
+}).Bind(Model).GetHtml()

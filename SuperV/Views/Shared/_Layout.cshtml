@@ -13,15 +13,20 @@
     @Scripts.Render("~/bundles/panel")
 
     @Html.DevExpress().GetStyleSheets(
+    new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
         new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
         new StyleSheet { ExtensionSuite = ExtensionSuite.PivotGrid },
         new StyleSheet { ExtensionSuite = ExtensionSuite.GridView }
     )
     @Html.DevExpress().GetScripts(
+        new Script { ExtensionSuite = ExtensionSuite.Editors },
         new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
         new Script { ExtensionSuite = ExtensionSuite.PivotGrid },
         new Script { ExtensionSuite = ExtensionSuite.GridView }
     )
+     
+
+
 
 
     @RenderSection("scripts", required: false)

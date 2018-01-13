@@ -222,6 +222,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignalRHub.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ClassHelper.cs" />
     <Compile Include="ViewModels\MachineData.cs" />
     <Compile Include="ViewModels\MachineDataDetailsVM.cs" />
     <Compile Include="ViewModels\MachineWorkItemVM.cs" />
@@ -333,6 +334,7 @@
     <Content Include="Views\Home\MachineDetails.cshtml" />
     <Content Include="Views\Home\MachinePh1.cshtml" />
     <Content Include="Views\Home\_gridViewPartial.cshtml" />
+    <Content Include="Views\Home\_PivotGridPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

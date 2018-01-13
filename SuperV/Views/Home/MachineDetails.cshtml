@@ -4,13 +4,68 @@
 }
 
 <style>
-    body{
-        color:#ffffff;
+    body {
+        color: #ffffff;
     }
 </style>
-<h2>MachineDetails</h2>
 
-<table class="table table-bordered">
+<script type="text/javascript">
+    function OnDateChanged(s, e) {
+
+        $('#frmDateSelector').submit();
+    }
+</script>
+
+@using (Html.BeginForm("MachineDetails", "Home", FormMethod.Post, new { @id = "frmDateSelector" }))
+{
+    @Html.HiddenFor(m => Model.ID)
+    @Html.HiddenFor(m => Model.Status)
+
+    <div class="well well-machine-details @Model.BackgroundClass">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row">
+                    @Model.MachineName
+                </div>
+                <div class="row">
+                    @Model.StatusName
+                </div>
+            </div>
+            <div class="col-md-3 @Model.BackgroundStripeClass">
+                <div class="row">@Model.Speed</div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    @Model.ProductCode
+                </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row padding-5-tb">
+
+                @Html.DevExpress().DateEditFor(m => m.From, settings =>
+               {
+                   settings.Properties.ClientSideEvents.DateChanged = "OnDateChanged";
+                   settings.Properties.AllowNull = false;
+               }).GetHtml()
+            </div>
+            <div class="row padding-5-tb">
+                @Html.DevExpress().DateEditFor(m => m.To, settings =>
+               {
+                   settings.Properties.ClientSideEvents.DateChanged = "OnDateChanged";
+                   settings.Properties.AllowNull = false;
+               }).GetHtml()
+            </div>
+
+        </div>
+    </div>
+</div>
+}
+
+
+@Html.Action("PivotGridPartial", new { @ID = Model.ID , @Status = Model.Status , @From =Model.From.ToString("o"), @To = Model.To.ToString("o")})
+
+
+@*<table class="table table-bordered">
     <thead>
         <tr>
             <th>start</th>
@@ -20,7 +75,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var item in Model.WorkItems)
+        @foreach (var item in Model.WorkItems)
         {
             <tr>
                 <td>@item.Start</td>
@@ -30,30 +85,18 @@
             </tr>
         }
     </tbody>
-</table>
+</table>*@
 
 
-<h1 id="ID" onclick="load(@ViewBag.ID)">@ViewBag.ID</h1>
-<div id="qui" >
 
-   @Html.Partial("_GridViewPartial", Model.WorkItems )
+<div id="qui">
+
+    @Html.Partial("_GridViewPartial", Model.WorkItems )
 
 </div>
 
 
-<script type="text/javascript">
-   
 
-    function load(ID) {
-         
-        $('#qui').load("/home/machinePh1/", {'ID' : ID}, function()
-        {
-             
-        });
-        
-    }
-     
-</script>
 
 
 

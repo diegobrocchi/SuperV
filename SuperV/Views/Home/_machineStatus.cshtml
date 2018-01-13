@@ -1,7 +1,7 @@
 ﻿@model SuperV.ViewModels.MachineData
 
 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 padding-2  anchorNoStyle  ">
-    <a href="@Url.Action("machineDetails", "home", new {@ID = Model.MachineID , @From = DateTime.Now.AddMonths(-1).Date, @To = DateTime.Now.Date})" >
+    <a href="@Url.Action("machineDetails", "home", new {@ID = Model.MachineID , @Status = Model.Status , @From = DateTime.Now.AddMonths(-1).Date.ToString("o"), @To = DateTime.Now.Date.ToString("o")})" >
         <div class="well well-machine @Model.BackgroundClass">
             <div class="row">
                 <div class="col-md-12">

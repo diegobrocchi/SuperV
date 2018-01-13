@@ -1,39 +1,39 @@
 ﻿body {
-    padding-top: 5px;
-    padding-bottom: 20px;
-    
+	padding-top: 5px;
+	padding-bottom: 20px;
+	
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
 .dl-horizontal dt {
-    white-space: normal;
+	white-space: normal;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
-    max-width: 400px;
+	max-width: 400px;
 }
 
 .counter-content {
-    padding: 15px;
-    font-size: 18px;
-    min-height: 200px;
-    background: #dbdfe5;
-    margin-bottom: 10px;
+	padding: 15px;
+	font-size: 18px;
+	min-height: 200px;
+	background: #dbdfe5;
+	margin-bottom: 10px;
 }
 
    .top-5{
-       margin-top: 5px;
+	   margin-top: 5px;
    } 
 
    .form-box {
@@ -86,23 +86,35 @@ textarea {
 }
 
 .padding-5{
-    padding-left: 5px;
-    padding-right:5px;
+	padding-left: 5px;
+	padding-right:5px;
 
 }
 
 .padding-2{
-    padding-left: 2px;
-    padding-right:2px;
+	padding-left: 2px;
+	padding-right:2px;
+}
+
+.padding-5-tb{
+	padding-top:5px;
+	padding-bottom:5px;
 }
 
 .well-machine{
-    padding-left:15px;
-    padding-right:15px;
-    padding-top:5px;
-    border-radius:15px;
-    border: 0px;
-    min-height:220px;
+	padding-left:15px;
+	padding-right:15px;
+	padding-top:5px;
+	border-radius:15px;
+	border: 0px;
+	min-height:220px;
+}
+
+.well-machine-details{
+    padding: 5px 15px 5px 15px;
+	border-radius:15px;
+	border:0px;
+	
 }
 
 .anchorNoStyle a:link ,
@@ -114,158 +126,160 @@ textarea {
 }
 
 .well-machine .machine-name{
-    font-size: 1.5em;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 10px;
+	font-size: 1.5em;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 10px;
 }
 
 .well-machine .machine-speed{
-    font-size: 4em;
-    font-weight:bold;
-    text-align: center;
-    margin-top:5px;
-    
+	font-size: 4em;
+	font-weight:bold;
+	text-align: center;
+	margin-top:5px;
+	
 }
 
 .well-machine .machine-speed-label{
-    font-size:0.75em;
-    text-align:center;
-    margin-bottom:5px;
+	font-size:0.75em;
+	text-align:center;
+	margin-bottom:5px;
 }
 
 .well-machine .machine-operation{
-    font-size:1.2em;
-    text-align:center;
-    font-weight:bold;
-    margin-bottom:10px;
+	font-size:1.2em;
+	text-align:center;
+	font-weight:bold;
+	margin-bottom:10px;
 }
 
 .well-machine .machine-productCode{
-    font-size:0.85em;
-    font-weight:bold;
-    text-align:center;
+	font-size:0.85em;
+	font-weight:bold;
+	text-align:center;
 }
 
 /* colore di una macchina DISCONNESSA (0) GRIGIO SCURO */
 .bg-machine-disconnected {
-    background-color : #FFFFFF;
+	background-color : #FFFFFF;
 }
 
 /* colore centrale di una macchina DISCONNESSA (0) */
 .bg-highlight-strip-disconnected {
-    background-color:#999999;
+	background-color:#999999;
 }
 
 /* colore di una macchina in EMERGENZA (1) ROSSO */
 .bg-machine-emergency {
-    background-color: #FF5757;
+	background-color: #FF5757;
 }
 
 /* colore centrale di una macchina in EMERGENZA (1) ROSSO */
 .bg-highlight-strip-emergency {
-    background-color: #be3e3e;
+	background-color: #be3e3e;
 }
 
 /* colore di una macchina in ALLARME (2) GIALLO */
 .bg-machine-alarm {
-    background-color: #FF8B00;
+	background-color: #FF8B00;
 }
 
 /* colore centrale di una macchine in ALLARME (2)*/
 .bg-highlight-strip-alarm {
-    background-color : #bf6900;
+	background-color : #bf6900;
 }
 
 /* colore di una macchine RUN (3) */
 .bg-machine-run {
-     background-color:#8DC73F;
+	 background-color:#8DC73F;
 }
 
 /* colore centrale di una macchina in RUN (3)*/
 .bg-highlight-strip-run {
-    background-color: #557722;
+	background-color: #557722;
 }
 
 /* colore di una macchina MARCIA IN ALLARME (4) ARANCIONE */
 .bg-machine-run-alarm {
-    background-color: #F36523;
+	background-color: #F36523;
 }
 
 /* colore centrale di una macchina in MARCIA IN ALLARME (4) */
 .bg-highlight-strip-run-alarm {
-    background-color: #c8541d;
+	background-color: #c8541d;
 }
 
 /* colroe di una macchine in ARRESTO (5) */
 .bg-machine-stop {
-    background-color : #A9AAAE;
+	background-color : #A9AAAE;
 }
 
 /* colore centrale di una macchina in ARRESTO (5) */
 .bg-highlight-strip-stop {
-    background-color: #88898d;
+	background-color: #88898d;
 }
 
 /* colore di una macchina in ATTREZZAGGIO (6)*/
 .bg-machine-setup {
-    background-color:#7DA7D9;
+	background-color:#7DA7D9;
 }
 
 /* colore centrale di una macchina in ATTREZZAGGIO (6) */
 .bg-highlight-strip-setup {
-    background-color: #5e80a8;
+	background-color: #5e80a8;
 }
 
 /* colore di una macchina in AVVIAMENTO (7) */
 .bg-machine-startup {
-    background-color: #f275a9;
+	background-color: #f275a9;
 }
 
 /* colore centrale di una macchina in AVVIAMENTO (7) */
 .bg-highlight-strip-startup {
-    background-color: #924766;
+	background-color: #924766;
 }
 
 /* colore di una macchina INATTIVA*/
 .bg-machine-inactive{
-    background-color: #FFFFFF;
+	background-color: #FFFFFF;
 }
 /* colore centrale di una macchina INATTIVA */
 .bg-highlight-strip-inactive{
-    background-color:#999999;
+	background-color:#999999;
 }
 
 /* colore di una macchina OPERATIVA */
 .bg-machine-working{
-    background-color:#88CC33;
+	background-color:#88CC33;
 }
 
 /* striscia centrale di una macchina OPERATIVA*/
 .bg-highlight-strip-working{
-    background-color: #557722;
+	background-color: #557722;
 }
 
 /* colore di una macchina CAMBIO */
 .bg-machine-change{
-    background-color:#FF77AA;
+	background-color:#FF77AA;
 }
 .bg-highlight-strip-change{
-    background-color:#994466;
+	background-color:#994466;
 }
 
 
 #overlay {
-        background: rgba(218, 219, 217, 0.50);
-        color: #666666;
-        position: fixed;
-        height: 100%;
-        width: 100%;
-        z-index: 5000;
-        top: 0;
-        left: 0;
-        float: left;
-        text-align: center;
-        padding-top: 25%;
-        
-    }
+		background: rgba(218, 219, 217, 0.50);
+		color: #666666;
+		position: fixed;
+		height: 100%;
+		width: 100%;
+		z-index: 5000;
+		top: 0;
+		left: 0;
+		float: left;
+		text-align: center;
+		padding-top: 25%;
+		
+	}
+
+ 

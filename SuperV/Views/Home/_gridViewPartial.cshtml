@@ -1,9 +1,22 @@
 ﻿@Html.DevExpress().GridView(settings =>
 {
     settings.Name = "MyGV";
-    settings.CallbackRouteValues = new { Controller = "home", Action = "gridViewPartial" };
+    settings.CallbackRouteValues = new { Controller = "home", Action = "gridViewPartial",  
+        @ID = ViewData["ID"],
+        @Status = ViewData["Status"],
+        @From = ViewData["From"],
+        @To = ViewData["To"]
+    };
+
     settings.Width =  System.Web.UI.WebControls.Unit.Percentage(90);
+
     settings.Columns.Add("Code");
     settings.Columns.Add("Minutes");
-
+    settings.Columns.Add("Quantity");
+    settings.Columns.Add("QuantityMade");
+    settings.Columns.Add("QuantityWasted");
+    settings.Columns.Add("UM");
+    settings.Columns.Add("Start");
+    settings.Columns.Add("Finish");
+    settings.Columns.Add("Minutes");
 }).Bind(Model).GetHtml()
