@@ -1,15 +1,15 @@
 ﻿@Html.DevExpress().GridView(settings =>
 {
     settings.Name = "MyGV";
-    settings.CallbackRouteValues = new { Controller = "home", Action = "gridViewPartial",  
+    settings.CallbackRouteValues = new { Controller = "home", Action = "gridViewPartial",
         @ID = ViewData["ID"],
         @Status = ViewData["Status"],
         @From = ViewData["From"],
         @To = ViewData["To"]
     };
 
-    settings.Width =  System.Web.UI.WebControls.Unit.Percentage(90);
-
+    settings.Width =  System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
     settings.Columns.Add("Code");
     settings.Columns.Add("Minutes");
     settings.Columns.Add("Quantity");

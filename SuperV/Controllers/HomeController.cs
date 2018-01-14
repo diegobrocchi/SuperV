@@ -8,12 +8,12 @@ using System.Web.Mvc;
 
 namespace SuperV.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Panel");
         }
 
 

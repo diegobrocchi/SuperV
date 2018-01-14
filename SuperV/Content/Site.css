@@ -111,10 +111,17 @@ textarea {
 }
 
 .well-machine-details{
-    padding: 5px 15px 5px 15px;
+	padding: 5px 15px 5px 15px;
 	border-radius:15px;
 	border:0px;
 	
+}
+
+.well-grid-details{
+	padding: 5px 15px 5px 15px;
+	border-radius :15px;
+	border:0px;
+	background-color : black;
 }
 
 .anchorNoStyle a:link ,
@@ -266,6 +273,9 @@ textarea {
 	background-color:#994466;
 }
 
+.theme-color{
+	color:#FF8B00;
+}
 
 #overlay {
 		background: rgba(218, 219, 217, 0.50);
