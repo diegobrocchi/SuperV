@@ -10,6 +10,10 @@
 
     settings.Width =  System.Web.UI.WebControls.Unit.Percentage(100);
     settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
+    settings.SettingsBehavior.AllowFocusedRow = true;
+    settings.ClientSideEvents.FocusedRowChanged = "OnGridFocusedRowChanged";
+    settings.KeyFieldName = "Code";
+
     settings.Columns.Add("Code");
     settings.Columns.Add("Minutes");
     settings.Columns.Add("Quantity");

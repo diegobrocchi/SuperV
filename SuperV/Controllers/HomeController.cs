@@ -187,12 +187,56 @@ namespace SuperV.Controllers
              
             return PartialView("_PivotGridPartial", model.WorkItems );
         }
+
+        public ActionResult GetFasiTable(int ID, DateTime From, DateTime To, string Code)
+        {
+            ViewData["Code"] = Code;
+            var model = new List<Test>();
+            model.Add(new Controllers.Test()
+            {
+                Name = "AAAA"
+            });
+            model.Add(new Controllers.Test()
+            {
+                Name = "BBB"
+            });
+            return PartialView("_partialFasiTable", model);
+        }
+        public ActionResult GetAttrezzaggiTable(int ID, DateTime From, DateTime To, string Code)
+        {
+            ViewData["Code"] = Code;
+            var model = new List<Test>();
+            model.Add(new Controllers.Test()
+            {
+                Name = "AAAA"
+            });
+            model.Add(new Controllers.Test()
+            {
+                Name = "BBB"
+            });
+            return PartialView("_partialAttrezzaggiTable", model);
+        }
+        public ActionResult GetFermiTable(int ID, DateTime From, DateTime To, string Code)
+        {
+            ViewData["Code"] = Code;
+            var model = new List<Test>();
+            model.Add(new Controllers.Test()
+            {
+                Name = "AAAA"
+            });
+            model.Add(new Controllers.Test()
+            {
+                Name = "BBB"
+            });
+            return PartialView("_partialFermiTable", model);
+        }
     }
 
     public class Test
     {
         public string Code { get; set; }
         public string Minutes { get; set; }
+        public string Name { get; set; }
     }
     //public class PanelDetailVM
     //{

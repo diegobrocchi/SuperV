@@ -335,6 +335,9 @@
     <Content Include="Views\Home\MachinePh1.cshtml" />
     <Content Include="Views\Home\_gridViewPartial.cshtml" />
     <Content Include="Views\Home\_PivotGridPartial.cshtml" />
+    <Content Include="Views\Home\_partialFasiTable.cshtml" />
+    <Content Include="Views\Home\_partialAttrezzaggiTable.cshtml" />
+    <Content Include="Views\Home\_partialFermiTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

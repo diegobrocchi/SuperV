@@ -20,6 +20,8 @@
 {
     @Html.HiddenFor(m => Model.ID)
     @Html.HiddenFor(m => Model.Status)
+    @Html.Hidden("FromField",  Model.From.ToString("o"), new { @id = "hiddenFromField" })
+    @Html.Hidden("ToField" , Model.To.ToString("o"), new { @id="hiddenToField"})
 
     <div class="well well-machine-details @Model.BackgroundClass">
         <div class="row">
@@ -97,10 +99,10 @@
 <div class="well well-grid-details">
     <div class="row ">
         <div class="col-md-1">
-            <i class="fa fa-table fa-3x theme-color"></i> 
+            <i class="fa fa-table fa-3x theme-color"></i>
         </div>
         <div class="col-md-11">
-           <h4>Bolle</h4>
+            <h4>Bolle</h4>
         </div>
     </div>
     <div class="row">
@@ -109,6 +111,60 @@
         </div>
     </div>
 
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="well well-grid-details">
+            <div class="row">
+                <div class="col-md-2">
+                    <i class="fa fa-table fa-3x theme-color"></i>
+                </div>
+                <div class="col-md-10">
+                    <h4>Fasi</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div id="fasiTable">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="well well-grid-details">
+            <div class="row">
+                <div class="col-md-2">
+                    <i class="fa fa-table fa-3x theme-color"></i>
+                </div>
+                <div class="col-md-10">
+                    <h4>Attrezzaggi</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div id="attrezzaggioTable">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="well well-grid-details">
+            <div class="row">
+                <div class="col-md-2">
+                    <i class="fa fa-table fa-3x theme-color"></i>
+                </div>
+                <div class="col-md-10">
+                    <h4>Fermi</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div id="fermiTable">
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 

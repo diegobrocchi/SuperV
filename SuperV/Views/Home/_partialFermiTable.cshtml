@@ -1,0 +1,20 @@
+﻿
+@Html.DevExpress().GridView(settings =>
+{
+    settings.Name = "gridviewFermi";
+    settings.CallbackRouteValues = new
+    {
+        Controller = "home",
+        Action = "GetFermiTable",
+        @ID = ViewData["ID"],
+        @From = ViewData["From"],
+        @To = ViewData["To"]
+
+    };
+
+    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
+    settings.KeyFieldName = "Name";
+
+    settings.Columns.Add("Name");
+}).Bind(Model).GetHtml()
