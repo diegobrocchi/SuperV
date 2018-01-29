@@ -16,14 +16,25 @@
     new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
         new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
         new StyleSheet { ExtensionSuite = ExtensionSuite.PivotGrid },
-        new StyleSheet { ExtensionSuite = ExtensionSuite.GridView }
+        new StyleSheet { ExtensionSuite = ExtensionSuite.GridView },
+         new StyleSheet { ExtensionSuite = ExtensionSuite.Dashboard }
     )
     @Html.DevExpress().GetScripts(
         new Script { ExtensionSuite = ExtensionSuite.Editors },
         new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
         new Script { ExtensionSuite = ExtensionSuite.PivotGrid },
-        new Script { ExtensionSuite = ExtensionSuite.GridView }
+        new Script { ExtensionSuite = ExtensionSuite.GridView },
+        new Script { ExtensionSuite = ExtensionSuite.Dashboard }
     )
+
+     
+
+
+
+
+
+
+
      
 
 
@@ -56,10 +67,10 @@
         @RenderBody()
     </div>
 
-    <div id="overlay" >
+    @*<div id="overlay" >
         <img src="~/content/images/252.gif" alt="Loading" width="100" /><br />
         Loading...
-    </div>
+    </div>*@
     
    
     

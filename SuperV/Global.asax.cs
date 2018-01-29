@@ -11,16 +11,17 @@ namespace SuperV
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-       
+
 
         protected void Application_Start()
         {
+            DashboardConfig.RegisterService(RouteTable.Routes);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             SQLDependencyConfig.Start();
-           
+
         }
 
         protected void Application_End()

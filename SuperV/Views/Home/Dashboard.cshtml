@@ -1,0 +1,11 @@
+﻿ 
+@inherits System.Web.Mvc.WebViewPage
+@using DevExpress.Web.Mvc.UI;
+
+@Html.DevExpress().Dashboard(settings =>
+{
+    settings.Name = "Dashboard";
+    settings.WorkingMode = DevExpress.DashboardWeb.WorkingMode.ViewerOnly;
+    settings.InitialDashboardId = "dashboard1";
+
+}).GetHtml()

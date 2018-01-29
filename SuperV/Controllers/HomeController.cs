@@ -255,6 +255,12 @@ namespace SuperV.Controllers
             });
             return PartialView("_partialFermiTable", model);
         }
+
+        public ActionResult Dashboard()
+        {
+            return View();
+
+        }
     }
 
     public class Test
