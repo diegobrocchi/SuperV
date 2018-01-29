@@ -8,7 +8,8 @@
         Action = "GetAttrezzaggiTable",
         @ID = ViewData["ID"],
         @From = ViewData["From"],
-        @To = ViewData["To"]
+        @To = ViewData["To"],
+        @Code = ViewData["Code"]
 
     };
 
@@ -17,4 +18,5 @@
     settings.KeyFieldName = "Name";
 
     settings.Columns.Add("Name");
+    settings.Columns.Add("Quantity");
 }).Bind(Model).GetHtml()

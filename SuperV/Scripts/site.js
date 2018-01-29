@@ -21,7 +21,7 @@ function OnGetRowValues(Value) {
     var To = $('#hiddenToField').val();
 
     $.ajax({
-        url: "/Home/GetFasiTable",
+        url: "/Home/GetProcessingStepsTable",
         type: "GET",
         data: { 'Code': Value, 'ID': ID ,'From' : From, 'To': To}
             })

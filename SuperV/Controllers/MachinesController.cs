@@ -11,7 +11,7 @@ namespace SuperV.Controllers
         // GET: Panel
         public ActionResult Index()
         {
-            var mg =   SQLDependencyManager.Instance ;
+            var mg = SQLDependencyManager.Instance ;
             mg.RegisterSQLDependencyOnTableMachineStatus();
 
             using (var ctx = new SuperVCore.Context.EnoplasticEntities())

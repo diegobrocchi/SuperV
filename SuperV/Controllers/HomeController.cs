@@ -16,12 +16,10 @@ namespace SuperV.Controllers
             return RedirectToAction("Panel");
         }
 
-
         public ActionResult Panel()
         {
             return View();
         }
-
 
         /// <summary>
         /// Recupera i dati dal DB e prepara la view pannello con tutte le macchine.
@@ -59,12 +57,12 @@ namespace SuperV.Controllers
         public ActionResult MachineDetails(int ID, int Status, DateTime? From, DateTime? To)
         {
             //Inizializza le date nel caso manchino
-            DateTime  queryDateFrom;
+            DateTime queryDateFrom;
             DateTime queryDateTo;
             if (!From.HasValue)
                 queryDateFrom = DateTime.Now.AddMonths(-1).Date;
             else
-                queryDateFrom = From.Value ;
+                queryDateFrom = From.Value;
 
             if (!To.HasValue)
                 queryDateTo = DateTime.Now.Date;
@@ -82,7 +80,7 @@ namespace SuperV.Controllers
             using (var ctx = new SuperVCore.Context.EnoplasticEntities())
             {
                 var actualStatusMachine = ctx.MachineStatus.Where(x => x.MachineID == ID).SingleOrDefault();
-                
+
                 model.ID = ID;
                 model.MachineName = actualStatusMachine.Machines.Name;
                 model.StatusName = actualStatusMachine.MachineStates.Name;
@@ -111,12 +109,12 @@ namespace SuperV.Controllers
             return View(model);
         }
 
-        public ActionResult MachinePh1(int ID)
-        {
+        //public ActionResult MachinePh1(int ID)
+        //{
 
-            ViewBag.ph1 = "AA " + DateTime.Now.Millisecond;
-            return PartialView();
-        }
+        //    ViewBag.ph1 = "AA " + DateTime.Now.Millisecond;
+        //    return PartialView();
+        //}
 
         public ActionResult GridViewPartial(int ID, int Status, DateTime From, DateTime To)
         {
@@ -147,7 +145,7 @@ namespace SuperV.Controllers
                     }).ToList();
             }
 
-            return PartialView("_GridViewPartial", model.WorkItems );
+            return PartialView("_GridViewPartial", model.WorkItems);
         }
 
         [ValidateInput(false)]
@@ -170,7 +168,7 @@ namespace SuperV.Controllers
                 model.WorkItems = ctx.Works.Where(x => x.MachineID == ID)
                     .Where(x => x.Start.HasValue)
                     .Where(x => x.Finish.HasValue)
-                    .Where(x => x.Start >= From )
+                    .Where(x => x.Start >= From)
                     .Where(x => x.Finish <= To)
                     .GroupBy(x => new { @code = x.Code, @um = x.UnitOfMeasure })
                     .Select(x => new ViewModels.MachineWorkItemVM()
@@ -184,38 +182,65 @@ namespace SuperV.Controllers
                     }).ToList();
             }
 
-             
-            return PartialView("_PivotGridPartial", model.WorkItems );
+
+            return PartialView("_PivotGridPartial", model.WorkItems);
         }
 
-        public ActionResult GetFasiTable(int ID, DateTime From, DateTime To, string Code)
+        public ActionResult GetProcessingStepsTable(int ID, DateTime From, DateTime To, string Code)
         {
+            var model = new List<MachineProcessingStepsVM>();
+            using (var ctx = new SuperVCore.Context.EnoplasticEntities())
+            {
+                model = ctx.ProcessingSteps
+                    .Where(ps => ps.MachineID == ID)
+                    .GroupBy(g => g.MachineStates)
+                    .Select(x => new MachineProcessingStepsVM()
+                    {
+                        Name = x.Key.Name,
+                        TotalMinutes = x.Sum(g => g.Works
+                        .Where(f => f.Code == Code)
+                        .Where(f => f.Start.HasValue)
+                        .Where(f => f.Finish.HasValue)
+                        .Sum(f => System.Data.Entity.DbFunctions.DiffMinutes(f.Start.Value, f.Finish.Value).Value)),
+                        Waste = x.Sum(g => g.Works.Where(f => f.Code == Code).Where(f => f.Waste.HasValue).Select(f => f.Waste.Value).Sum())
+                    })
+                    .OrderBy(x => x.Name)
+                    .ToList();
+            }
             ViewData["Code"] = Code;
-            var model = new List<Test>();
-            model.Add(new Controllers.Test()
-            {
-                Name = "AAAA"
-            });
-            model.Add(new Controllers.Test()
-            {
-                Name = "BBB"
-            });
+
             return PartialView("_partialFasiTable", model);
         }
+
         public ActionResult GetAttrezzaggiTable(int ID, DateTime From, DateTime To, string Code)
         {
+            var model = new List<MachineSetUpsVM>();
+            using (var ctx = new SuperVCore.Context.EnoplasticEntities())
+            {
+                model = ctx.SetUpPartsLog
+                    .Where(s => s.Works.MachineID == ID)
+                    .Where(s => s.Works.Code == Code)
+                    .Where(x => x.Works.Start.HasValue)
+                    .Where(x => x.Works.Finish.HasValue)
+                    .Where(x => x.Works.Start >= From)
+                    .Where(x => x.Works.Finish <= To)
+                    .Where(x => x.Value.HasValue)
+                    .GroupBy(x => new { @name = x.SetUpParts.Description })
+                    .Select(x => new ViewModels.MachineSetUpsVM()
+                    {
+                        Name = x.Key.name,
+                        Quantity = x.Sum(g => g.Value.Value)
+                    })
+                    .OrderBy(x => x.Name)
+                    .ToList();
+            }
             ViewData["Code"] = Code;
-            var model = new List<Test>();
-            model.Add(new Controllers.Test()
-            {
-                Name = "AAAA"
-            });
-            model.Add(new Controllers.Test()
-            {
-                Name = "BBB"
-            });
+            ViewData["ID"] = ID;
+            ViewData["From"] = From;
+            ViewData["To"] = To;
             return PartialView("_partialAttrezzaggiTable", model);
         }
+
         public ActionResult GetFermiTable(int ID, DateTime From, DateTime To, string Code)
         {
             ViewData["Code"] = Code;

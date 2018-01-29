@@ -2,19 +2,21 @@
 @Html.DevExpress().GridView(settings =>
 {
     settings.Name = "gridviewFasi";
-    settings.CallbackRouteValues = new
-    {
-        Controller = "home",
-        Action = "GetFasiTable",
-        @ID = ViewData["ID"],
-        @From = ViewData["From"],
-        @To = ViewData["To"]
+    //settings.CallbackRouteValues = new
+    //{
+    //    Controller = "home",
+    //    Action = "GetProcessingStepsTable",
+    //    @ID = ViewData["ID"],
+    //    @From = ViewData["From"],
+    //    @To = ViewData["To"]
 
-    };
+    //};
 
     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
     settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
     settings.KeyFieldName = "Name";
 
     settings.Columns.Add("Name");
+    settings.Columns.Add("TotalMinutes");
+    settings.Columns.Add("Waste");
 }).Bind(Model).GetHtml()

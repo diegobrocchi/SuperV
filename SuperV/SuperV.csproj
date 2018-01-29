@@ -225,6 +225,8 @@
     <Compile Include="ViewModels\ClassHelper.cs" />
     <Compile Include="ViewModels\MachineData.cs" />
     <Compile Include="ViewModels\MachineDataDetailsVM.cs" />
+    <Compile Include="ViewModels\MachineProcessingStepsVM.cs" />
+    <Compile Include="ViewModels\MachineSetUpsVM.cs" />
     <Compile Include="ViewModels\MachineWorkItemVM.cs" />
     <Compile Include="ViewModels\PartialPanelVM.cs" />
   </ItemGroup>
