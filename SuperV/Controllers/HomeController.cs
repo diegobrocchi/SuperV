@@ -32,7 +32,9 @@ namespace SuperV.Controllers
             List<MachineData> machinesData = new List<ViewModels.MachineData>();
             using (var ctx = new SuperVCore.Context.EnoplasticEntities())
             {
-                machinesData = ctx.MachineStatus.Select(x => new ViewModels.MachineData()
+                machinesData = ctx.MachineStatus
+                    .Where(x => x.Machines.DepartmantID== 2)
+                    .Select(x => new ViewModels.MachineData()
                 {
                     MachineID = x.MachineID,
                     Speed = x.Speed.Value,
