@@ -1,0 +1,44 @@
+@model IEnumerable<SuperVCore.Context.SP_ReportWorks_StartDate_EndDate_MachineID_Result>
+    @{
+        var grid = Html.DevExpress().GridView(settings =>
+        {
+            settings.Name = "GridViewExp";
+            settings.CallbackRouteValues = new { Controller = "Home", Action = "GridViewExpPartial" };
+
+            //settings.SettingsExport.EnableClientSideExportAPI = true;
+            //settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
+
+            settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Home", Action = "GridViewExpPartialAddNew" };
+            settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Home", Action = "GridViewExpPartialUpdate" };
+            settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Home", Action = "GridViewExpPartialDelete" };
+            settings.SettingsEditing.Mode =  GridViewEditingMode.EditFormAndDisplayRow;
+            settings.SettingsBehavior.ConfirmDelete = true;
+
+            settings.CommandColumn.Visible = true;
+            settings.CommandColumn.ShowNewButton = true;
+            settings.CommandColumn.ShowDeleteButton = true;
+            settings.CommandColumn.ShowEditButton = true;
+
+            settings.KeyFieldName = "ID";
+
+            settings.Columns.Add("Macchina");
+            settings.Columns.Add("Operatore");
+
+            settings.SettingsPager.Visible = true;
+            settings.Settings.ShowGroupPanel = true;
+            settings.Settings.ShowFilterRow = true;
+            settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+            settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+            settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+            settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+            settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+            settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+        });
+        if (ViewData["EditError"] != null)
+        {
+            grid.SetEditErrorText((string)ViewData["EditError"]);
+        }
+    }
+    @grid.Bind(Model).GetHtml()

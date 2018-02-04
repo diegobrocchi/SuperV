@@ -33,17 +33,17 @@ namespace SuperV.Controllers
             using (var ctx = new SuperVCore.Context.EnoplasticEntities())
             {
                 machinesData = ctx.MachineStatus
-                    .Where(x => x.Machines.DepartmantID== 2)
+                    .Where(x => x.Machines.DepartmantID == 2)
                     .Select(x => new ViewModels.MachineData()
-                {
-                    MachineID = x.MachineID,
-                    Speed = x.Speed.Value,
-                    ProductCode = x.ProductCode,
-                    Status = x.MachineStateID.Value,
-                    TotalCount = x.Counter.Value,
-                    MachineName = x.Machines.Name,
-                    WorkOperation = x.MachineStates.Name
-                }).ToList();
+                    {
+                        MachineID = x.MachineID,
+                        Speed = x.Speed.Value,
+                        ProductCode = x.ProductCode,
+                        Status = x.MachineStateID.Value,
+                        TotalCount = x.Counter.Value,
+                        MachineName = x.Machines.Name,
+                        WorkOperation = x.MachineStates.Name
+                    }).ToList();
             }
 
             model.MachinesData = machinesData;
@@ -262,6 +262,110 @@ namespace SuperV.Controllers
         {
             return View();
 
+        }
+
+        public ActionResult Report()
+        {
+            return View();
+
+        }
+
+        XtraReport1 report = new XtraReport1();
+
+        public ActionResult DocumentViewerPartial()
+        {
+            return PartialView("_DocumentViewerPartial", report);
+        }
+
+        public ActionResult DocumentViewerPartialExport()
+        {
+            return DocumentViewerExtension.ExportTo(report, Request);
+        }
+
+        public ActionResult ExportDetails()
+        {
+            return View();
+        }
+
+
+        [ValidateInput(false)]
+        public ActionResult GridViewExpPartial()
+        {
+
+            SuperVCore.Context.EnoplasticEntities db = new SuperVCore.Context.EnoplasticEntities();
+            var model = db.SP_ReportWorks_StartDate_EndDate_MachineID(DateTime.Now.AddDays(-365), DateTime.Now, 29 ).ToList();
+            return PartialView("_GridViewExpPartial", model.ToList());
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult GridViewExpPartialAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] SuperVCore.Context.Works item)
+        {
+            SuperVCore.Context.EnoplasticEntities db = new SuperVCore.Context.EnoplasticEntities();
+
+            var model = db.Works;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    model.Add(item);
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_GridViewExpPartial", model.ToList());
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult GridViewExpPartialUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] SuperVCore.Context.Works item)
+        {
+            SuperVCore.Context.EnoplasticEntities db = new SuperVCore.Context.EnoplasticEntities();
+
+            var model = db.Works;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var modelItem = model.FirstOrDefault(it => it.ID == item.ID);
+                    if (modelItem != null)
+                    {
+                        this.UpdateModel(modelItem);
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            else
+                ViewData["EditError"] = "Please, correct all errors.";
+            return PartialView("_GridViewExpPartial", model.ToList());
+        }
+        [HttpPost, ValidateInput(false)]
+        public ActionResult GridViewExpPartialDelete(System.Int32 ID)
+        {
+            SuperVCore.Context.EnoplasticEntities db = new SuperVCore.Context.EnoplasticEntities();
+
+            var model = db.Works;
+            if (ID >= 0)
+            {
+                try
+                {
+                    var item = model.FirstOrDefault(it => it.ID == ID);
+                    if (item != null)
+                        model.Remove(item);
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ViewData["EditError"] = e.Message;
+                }
+            }
+            return PartialView("_GridViewExpPartial", model.ToList());
         }
     }
 

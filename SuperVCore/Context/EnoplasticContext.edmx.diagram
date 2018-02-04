@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f37327e367ed47f48515da9676f5a432" Name="Diagram1" ZoomLevel="97">
+      <Diagram DiagramId="f37327e367ed47f48515da9676f5a432" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="EnoplasticModel.AS400ImportData" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EnoplasticModel.Departments" Width="1.5" PointX="1" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="EnoplasticModel.Downtimes" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />

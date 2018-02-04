@@ -5,10 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href='@Url.Content("~/")'>
     <title>@ViewBag.Title - SuperV Web</title>
+    @Styles.Render("~/bundles/dx_cl")
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-ui")
+    @Scripts.Render("~/bundles/knockout")
+    @*@Scripts.Render("~/bundles/require")*@
+
+    @Scripts.Render("~/bundles/ace")
+    @Scripts.Render("~/bundles/ace-ext")
+    @Scripts.Render("~/bundles/cldr")
+    @Scripts.Render("~/bundles/globalize")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/dx_all")
     @Scripts.Render("~/bundles/signalr")
     @Scripts.Render("~/bundles/panel")
 
@@ -17,17 +28,32 @@
         new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
         new StyleSheet { ExtensionSuite = ExtensionSuite.PivotGrid },
         new StyleSheet { ExtensionSuite = ExtensionSuite.GridView },
-         new StyleSheet { ExtensionSuite = ExtensionSuite.Dashboard }
+         new StyleSheet { ExtensionSuite = ExtensionSuite.Dashboard } ,
+            new StyleSheet { ExtensionSuite = ExtensionSuite.Report }  
     )
     @Html.DevExpress().GetScripts(
         new Script { ExtensionSuite = ExtensionSuite.Editors },
         new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
         new Script { ExtensionSuite = ExtensionSuite.PivotGrid },
         new Script { ExtensionSuite = ExtensionSuite.GridView },
-        new Script { ExtensionSuite = ExtensionSuite.Dashboard }
+        new Script { ExtensionSuite = ExtensionSuite.Dashboard },
+             new Script { ExtensionSuite = ExtensionSuite.Report }  
     )
 
      
+     
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
