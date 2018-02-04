@@ -20,8 +20,8 @@
 {
     @Html.HiddenFor(m => Model.ID)
     @Html.HiddenFor(m => Model.Status)
-    @Html.Hidden("FromField",  Model.From.ToString("o"), new { @id = "hiddenFromField" })
-    @Html.Hidden("ToField" , Model.To.ToString("o"), new { @id="hiddenToField"})
+    @Html.Hidden("FromField", Model.From.ToString("o"), new { @id = "hiddenFromField" })
+    @Html.Hidden("ToField", Model.To.ToString("o"), new { @id = "hiddenToField" })
 
     <div class="well well-machine-details @Model.BackgroundClass">
         <div class="row">
@@ -56,6 +56,10 @@
                    settings.Properties.ClientSideEvents.DateChanged = "OnDateChanged";
                    settings.Properties.AllowNull = false;
                }).GetHtml()
+                </div>
+                <div>
+                    <a href=@Url.Action("ExportDetails", new { @MachineID = Model.ID, @From= Model.From.ToString("o") , @To= Model.To.ToString("o") })><i class="fa fa-print fa-3x"></i></a>
+
                 </div>
 
             </div>

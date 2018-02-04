@@ -1,44 +1,80 @@
-@model IEnumerable<SuperVCore.Context.SP_ReportWorks_StartDate_EndDate_MachineID_Result>
-    @{
-        var grid = Html.DevExpress().GridView(settings =>
+
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridViewExp";
+        settings.CallbackRouteValues = new
         {
-            settings.Name = "GridViewExp";
-            settings.CallbackRouteValues = new { Controller = "Home", Action = "GridViewExpPartial" };
+            Controller = "Home",
+            Action = "GridViewExpPartial",
+            @MachineID = ViewData["MachineID"],
+            @From = ViewData["From"],
+            @To = ViewData["To"]
+        };
 
-            //settings.SettingsExport.EnableClientSideExportAPI = true;
-            //settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
+        settings.SettingsExport.EnableClientSideExportAPI = true;
+        settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
 
-            settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Home", Action = "GridViewExpPartialAddNew" };
-            settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Home", Action = "GridViewExpPartialUpdate" };
-            settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Home", Action = "GridViewExpPartialDelete" };
-            settings.SettingsEditing.Mode =  GridViewEditingMode.EditFormAndDisplayRow;
-            settings.SettingsBehavior.ConfirmDelete = true;
+        //settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Home", Action = "GridViewExpPartialAddNew" };
+        //settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Home", Action = "GridViewExpPartialUpdate" };
+        //settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Home", Action = "GridViewExpPartialDelete" };
+        //settings.SettingsEditing.Mode =  GridViewEditingMode.EditFormAndDisplayRow;
+        //settings.SettingsBehavior.ConfirmDelete = true;
 
-            settings.CommandColumn.Visible = true;
-            settings.CommandColumn.ShowNewButton = true;
-            settings.CommandColumn.ShowDeleteButton = true;
-            settings.CommandColumn.ShowEditButton = true;
+        //settings.CommandColumn.Visible = true;
+        //settings.CommandColumn.ShowNewButton = true;
+        //settings.CommandColumn.ShowDeleteButton = true;
+        //settings.CommandColumn.ShowEditButton = true;
 
-            settings.KeyFieldName = "ID";
-
-            settings.Columns.Add("Macchina");
-            settings.Columns.Add("Operatore");
-
-            settings.SettingsPager.Visible = true;
-            settings.Settings.ShowGroupPanel = true;
-            settings.Settings.ShowFilterRow = true;
-            settings.SettingsBehavior.AllowSelectByRowClick = true;
-
-            settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
-            settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
-            settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
-            settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
-            settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
-
+        settings.Toolbars.Add(t =>
+        {
+            t.EnableAdaptivity = true;
+            t.Items.Add(GridViewToolbarCommand.ExportToPdf);
+            t.Items.Add(GridViewToolbarCommand.ExportToXls);
+            t.Items.Add(GridViewToolbarCommand.ExportToXlsx);
+            t.Items.Add(GridViewToolbarCommand.ExportToDocx);
+            t.Items.Add(GridViewToolbarCommand.ExportToRtf);
+            t.Items.Add(GridViewToolbarCommand.ExportToCsv);
         });
-        if (ViewData["EditError"] != null)
-        {
-            grid.SetEditErrorText((string)ViewData["EditError"]);
-        }
+
+
+        //settings.KeyFieldName = "ID";
+
+        //settings.Columns.Add("Macchina");
+        settings.Columns.Add("Operatore");
+        settings.Columns.Add("DataTurno");
+        settings.Columns.Add("Bolla");
+        settings.Columns.Add("Materiale");
+        settings.Columns.Add("HF");
+        settings.Columns.Add("KgRichiesti");
+        settings.Columns.Add("MtRichiesti");
+        settings.Columns.Add("KgFatti");
+        settings.Columns.Add("MtFatti");
+        settings.Columns.Add("KgRilevati");
+        settings.Columns.Add("Fase");
+        settings.Columns.Add("InizioFase");
+        settings.Columns.Add("FineFase");
+        settings.Columns.Add("MinutiFase");
+        settings.Columns.Add("ScartoKg");
+        settings.Columns.Add("ScartoMT");
+        settings.Columns.Add("NomeFermo");
+        settings.Columns.Add("Minuti");
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.Off;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 0;
+
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
     }
-    @grid.Bind(Model).GetHtml()
+}
+@grid.Bind(Model).GetHtml()

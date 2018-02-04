@@ -1,2 +1,6 @@
 ﻿
-@Html.Action("GridViewExpPartial")
+@model IEnumerable<SuperVCore.Context.SP_ReportWorks_StartDate_EndDate_MachineID_Result>
+@using (Html.BeginForm())
+{
+    @Html.Partial("_GridViewExpPartial", Model)
+}

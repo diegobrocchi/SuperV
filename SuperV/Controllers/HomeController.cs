@@ -282,18 +282,26 @@ namespace SuperV.Controllers
             return DocumentViewerExtension.ExportTo(report, Request);
         }
 
-        public ActionResult ExportDetails()
+        public ActionResult ExportDetails(DateTime From, DateTime To, int MachineID)
         {
-            return View();
+
+            ViewData["MachineID"] = MachineID;
+            ViewData["From"] = From.ToString("o");
+            ViewData["To"] = To.ToString("o");
+            SuperVCore.Context.EnoplasticEntities db = new SuperVCore.Context.EnoplasticEntities();
+            var model = db.SP_ReportWorks_StartDate_EndDate_MachineID(From, To, MachineID).ToList();
+            return View(model);
         }
 
 
         [ValidateInput(false)]
-        public ActionResult GridViewExpPartial()
+        public ActionResult GridViewExpPartial(DateTime From, DateTime To, int MachineID)
         {
-
+            ViewData["MachineID"] = MachineID;
+            ViewData["From"] = From.ToString("o");
+            ViewData["To"] = To.ToString("o");
             SuperVCore.Context.EnoplasticEntities db = new SuperVCore.Context.EnoplasticEntities();
-            var model = db.SP_ReportWorks_StartDate_EndDate_MachineID(DateTime.Now.AddDays(-365), DateTime.Now, 29 ).ToList();
+            var model = db.SP_ReportWorks_StartDate_EndDate_MachineID(DateTime.Now.AddDays(-365), DateTime.Now, 29).ToList();
             return PartialView("_GridViewExpPartial", model.ToList());
         }
 
