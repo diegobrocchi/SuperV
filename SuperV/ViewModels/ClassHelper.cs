@@ -32,6 +32,20 @@ namespace SuperV.ViewModels
                     return Constants.BG_COLOR_SETUP;
                 case 7:
                     return Constants.BG_COLOR_STARTUP;
+                case 8:
+                    return Constants.BG_COLOR_CLEAN;
+                case 13:
+                    return Constants.BG_COLOR_09_NAV;
+                case 14:
+                    return Constants.BG_COLOR_07_CLEAN;
+                case 15:
+                    return Constants.BG_COLOR_02_COLOR;
+                case 16:
+                    return Constants.BG_COLOR_01_CHANGE;
+                case 21:
+                    return Constants.BG_COLOR_21_SETUP;
+                case 253:
+                    return Constants.BG_COLOR_99_PRODUCTION;
                 default:
                     return string.Empty;
             }
@@ -62,6 +76,20 @@ namespace SuperV.ViewModels
                     return Constants.BG_COLOR_SETUP_STRIPE;
                 case 7:
                     return Constants.BG_COLOR_STARTUP_STRIPE;
+                case 8:
+                    return Constants.BG_COLOR_CLEAN_STRIPE;
+                case 13:
+                    return Constants.BG_COLOR_09_NAV_STRIPE;
+                case 14:
+                    return Constants.BG_COLOR_07_CLEAN_STRIPE;
+                case 15:
+                    return Constants.BG_COLOR_02_COLOR_STRIPE;
+                case 16:
+                    return Constants.BG_COLOR_01_CHANGE_STRIPE;
+                case 21:
+                    return Constants.BG_COLOR_21_SETUP_STRIPE;
+                case 253:
+                    return Constants.BG_COLOR_99_PRODUCTION_STRIPE;
                 default:
                     return string.Empty;
             }

@@ -14,7 +14,8 @@
 
     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
     settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCells;
-    settings.KeyFieldName = "Name";
+    settings.KeyFieldName = "MachineAlarmName";
 
-    settings.Columns.Add("Name");
+    settings.Columns.Add("MachineAlarmName");
+    settings.Columns.Add("MinutesDowntime");
 }).Bind(Model).GetHtml()

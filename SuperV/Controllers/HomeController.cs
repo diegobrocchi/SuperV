@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace SuperV.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -78,6 +78,8 @@ namespace SuperV.Controllers
             ViewData["From"] = queryDateFrom.ToString("o");
             ViewData["To"] = queryDateTo.ToString("o");
 
+
+
             var model = new MachineDataDetailsVM();
             using (var ctx = new SuperVCore.Context.EnoplasticEntities())
             {
@@ -91,21 +93,22 @@ namespace SuperV.Controllers
                 model.From = queryDateFrom;
                 model.To = queryDateTo;
                 model.Status = Status;
-                model.WorkItems = ctx.Works.Where(x => x.MachineID == ID)
-                    .Where(x => x.Start.HasValue)
-                    .Where(x => x.Finish.HasValue)
-                    .Where(x => x.Start >= queryDateFrom)
-                    .Where(x => x.Finish <= queryDateTo)
-                    .GroupBy(x => new { @code = x.Code, @um = x.UnitOfMeasure })
-                    .Select(x => new ViewModels.MachineWorkItemVM()
-                    {
-                        Code = x.Key.code,
-                        IDs = x.Select(d => d.ID),
-                        Minutes = x.Sum(f => System.Data.Entity.DbFunctions.DiffMinutes(f.Start.Value, f.Finish.Value).Value),
-                        Start = x.Min(d => d.Start),
-                        Finish = x.Max(d => d.Finish)
+                model.WorkItemRows = ctx.SP_AggegatedWorks_Machine(ID).Take(10).ToList();
+                //model.WorkItems = ctx.Works.Where(x => x.MachineID == ID)
+                //    .Where(x => x.Start.HasValue)
+                //    .Where(x => x.Finish.HasValue)
+                //    .Where(x => x.Start >= queryDateFrom)
+                //    .Where(x => x.Finish <= queryDateTo)
+                //    .GroupBy(x => new { @code = x.Code, @um = x.UnitOfMeasure })
+                //    .Select(x => new ViewModels.MachineWorkItemVM()
+                //    {
+                //        Code = x.Key.code,
+                //        IDs = x.Select(d => d.ID),
+                //        Minutes = x.Sum(f => System.Data.Entity.DbFunctions.DiffMinutes(f.Start.Value, f.Finish.Value).Value),
+                //        Start = x.Min(d => d.Start),
+                //        Finish = x.Max(d => d.Finish)
 
-                    }).ToList();
+                //    }).ToList();
             }
 
             return View(model);
@@ -121,141 +124,160 @@ namespace SuperV.Controllers
         public ActionResult GridViewPartial(int ID, int Status, DateTime From, DateTime To)
         {
             var model = new MachineDataDetailsVM();
+            ViewData["ID"] = ID;
+            ViewData["Status"] = Status;
+            ViewData["From"] = From.ToString("o");
+            ViewData["To"] = To.ToString("o");
             using (var ctx = new SuperVCore.Context.EnoplasticEntities())
             {
                 var actualStatusMachine = ctx.MachineStatus.Where(x => x.MachineID == ID).SingleOrDefault();
+                var rows = ctx.SP_AggegatedWorks_Machine(ID).Take(10).ToList();
 
-                ViewData["ID"] = ID;
-                ViewData["Status"] = Status;
-                ViewData["From"] = From.ToString("o");
-                ViewData["To"] = To.ToString("o");
-
-                model.WorkItems = ctx.Works.Where(x => x.MachineID == ID)
-                    .Where(x => x.Start.HasValue)
-                    .Where(x => x.Finish.HasValue)
-                    .Where(x => x.Start >= From)
-                    .Where(x => x.Finish <= To)
-                    .GroupBy(x => new { @code = x.Code, @um = x.UnitOfMeasure })
-                    .Select(x => new ViewModels.MachineWorkItemVM()
-                    {
-                        Code = x.Key.code,
-                        IDs = x.Select(d => d.ID),
-                        Minutes = x.Sum(f => System.Data.Entity.DbFunctions.DiffMinutes(f.Start.Value, f.Finish.Value).Value),
-                        Start = x.Min(d => d.Start),
-                        Finish = x.Max(d => d.Finish)
-
-                    }).ToList();
+                return PartialView("_GridViewPartial", rows);
             }
 
-            return PartialView("_GridViewPartial", model.WorkItems);
+            //using (var ctx = new SuperVCore.Context.EnoplasticEntities())
+            //{
+            //    var actualStatusMachine = ctx.MachineStatus.Where(x => x.MachineID == ID).SingleOrDefault();
+
+            //    ViewData["ID"] = ID;
+            //    ViewData["Status"] = Status;
+            //    ViewData["From"] = From.ToString("o");
+            //    ViewData["To"] = To.ToString("o");
+
+            //    model.WorkItems = ctx.Works.Where(x => x.MachineID == ID)
+            //        .Where(x => x.Start.HasValue)
+            //        .Where(x => x.Finish.HasValue)
+            //        .Where(x => x.Start >= From)
+            //        .Where(x => x.Finish <= To)
+            //        .GroupBy(x => new { @code = x.Code, @um = x.UnitOfMeasure })
+            //        .Select(x => new ViewModels.MachineWorkItemVM()
+            //        {
+            //            Code = x.Key.code,
+            //            IDs = x.Select(d => d.ID),
+            //            Minutes = x.Sum(f => System.Data.Entity.DbFunctions.DiffMinutes(f.Start.Value, f.Finish.Value).Value),
+            //            Start = x.Min(d => d.Start),
+            //            Finish = x.Max(d => d.Finish)
+
+            //        }).ToList();
+            //}
+
+            //return PartialView("_GridViewPartial", model.WorkItems);
         }
 
-        [ValidateInput(false)]
-        public ActionResult PivotGridPartial(int ID, int Status, DateTime From, DateTime To)
-        {
+        //[ValidateInput(false)]
+        //public ActionResult PivotGridPartial(int ID, int Status, DateTime From, DateTime To)
+        //{
 
-            var model = new MachineDataDetailsVM();
-            using (var ctx = new SuperVCore.Context.EnoplasticEntities())
-            {
-                var actualStatusMachine = ctx.MachineStatus.Where(x => x.MachineID == ID).SingleOrDefault();
+        //    var model = new MachineDataDetailsVM();
+        //    using (var ctx = new SuperVCore.Context.EnoplasticEntities())
+        //    {
+        //        var actualStatusMachine = ctx.MachineStatus.Where(x => x.MachineID == ID).SingleOrDefault();
 
-                ViewData["ID"] = ID;
-                ViewData["Status"] = Status;
-                //model.MachineName = actualStatusMachine.Machines.Name;
-                //model.StatusName = actualStatusMachine.MachineStates.Name;
-                //model.ProductCode = actualStatusMachine.ProductCode;
-                //model.Speed = actualStatusMachine.Speed.HasValue ? actualStatusMachine.Speed.Value : 0;
-                ViewData["From"] = From.ToString("o");
-                ViewData["To"] = To.ToString("o");
-                model.WorkItems = ctx.Works.Where(x => x.MachineID == ID)
-                    .Where(x => x.Start.HasValue)
-                    .Where(x => x.Finish.HasValue)
-                    .Where(x => x.Start >= From)
-                    .Where(x => x.Finish <= To)
-                    .GroupBy(x => new { @code = x.Code, @um = x.UnitOfMeasure })
-                    .Select(x => new ViewModels.MachineWorkItemVM()
-                    {
-                        Code = x.Key.code,
-                        IDs = x.Select(d => d.ID),
-                        Minutes = x.Sum(f => System.Data.Entity.DbFunctions.DiffMinutes(f.Start.Value, f.Finish.Value).Value),
-                        Start = x.Min(d => d.Start),
-                        Finish = x.Max(d => d.Finish)
+        //        ViewData["ID"] = ID;
+        //        ViewData["Status"] = Status;
+        //        //model.MachineName = actualStatusMachine.Machines.Name;
+        //        //model.StatusName = actualStatusMachine.MachineStates.Name;
+        //        //model.ProductCode = actualStatusMachine.ProductCode;
+        //        //model.Speed = actualStatusMachine.Speed.HasValue ? actualStatusMachine.Speed.Value : 0;
+        //        ViewData["From"] = From.ToString("o");
+        //        ViewData["To"] = To.ToString("o");
+        //        //model.WorkItems = ctx.Works.Where(x => x.MachineID == ID)
+        //        //    .Where(x => x.Start.HasValue)
+        //        //    .Where(x => x.Finish.HasValue)
+        //        //    .Where(x => x.Start >= From)
+        //        //    .Where(x => x.Finish <= To)
+        //        //    .GroupBy(x => new { @code = x.Code, @um = x.UnitOfMeasure })
+        //        //    .Select(x => new ViewModels.MachineWorkItemVM()
+        //        //    {
+        //        //        Code = x.Key.code,
+        //        //        IDs = x.Select(d => d.ID),
+        //        //        Minutes = x.Sum(f => System.Data.Entity.DbFunctions.DiffMinutes(f.Start.Value, f.Finish.Value).Value),
+        //        //        Start = x.Min(d => d.Start),
+        //        //        Finish = x.Max(d => d.Finish)
 
-                    }).ToList();
-            }
+        //        //    }).ToList();
+        //    }
 
 
-            return PartialView("_PivotGridPartial", model.WorkItems);
-        }
+            //return PartialView("_PivotGridPartial", model.WorkItems);
+        //}
 
         public ActionResult GetProcessingStepsTable(int ID, DateTime From, DateTime To, string Code)
         {
-            var model = new List<MachineProcessingStepsVM>();
+            //var model = new List<MachineProcessingStepsVM>();
+            //using (var ctx = new SuperVCore.Context.EnoplasticEntities())
+            //{
+            //    model = ctx.ProcessingSteps
+            //        .Where(ps => ps.MachineID == ID)
+            //        .GroupBy(g => g.MachineStates)
+            //        .Select(x => new MachineProcessingStepsVM()
+            //        {
+            //            Name = x.Key.Name,
+            //            TotalMinutes = x.Sum(g => g.Works
+            //            .Where(f => f.Code == Code)
+            //            .Where(f => f.Start.HasValue)
+            //            .Where(f => f.Finish.HasValue)
+            //            .Sum(f => System.Data.Entity.DbFunctions.DiffMinutes(f.Start.Value, f.Finish.Value).Value)),
+            //            Waste = x.Sum(g => g.Works.Where(f => f.Code == Code).Where(f => f.Waste.HasValue).Select(f => f.Waste.Value).Sum())
+            //        })
+            //        .OrderBy(x => x.Name)
+            //        .ToList();
+            //}
+            //ViewData["Code"] = Code;
+
+            //return PartialView("_partialFasiTable", model);
+
             using (var ctx = new SuperVCore.Context.EnoplasticEntities())
             {
-                model = ctx.ProcessingSteps
-                    .Where(ps => ps.MachineID == ID)
-                    .GroupBy(g => g.MachineStates)
-                    .Select(x => new MachineProcessingStepsVM()
-                    {
-                        Name = x.Key.Name,
-                        TotalMinutes = x.Sum(g => g.Works
-                        .Where(f => f.Code == Code)
-                        .Where(f => f.Start.HasValue)
-                        .Where(f => f.Finish.HasValue)
-                        .Sum(f => System.Data.Entity.DbFunctions.DiffMinutes(f.Start.Value, f.Finish.Value).Value)),
-                        Waste = x.Sum(g => g.Works.Where(f => f.Code == Code).Where(f => f.Waste.HasValue).Select(f => f.Waste.Value).Sum())
-                    })
-                    .OrderBy(x => x.Name)
-                    .ToList();
+                var fasi = ctx.SP_AggegatedPhase_Machine_CODE(ID, Code).ToList();
+                return PartialView("_partialFasiTable", fasi);
             }
-            ViewData["Code"] = Code;
-
-            return PartialView("_partialFasiTable", model);
         }
 
         public ActionResult GetAttrezzaggiTable(int ID, DateTime From, DateTime To, string Code)
         {
-            var model = new List<MachineSetUpsVM>();
+            //var model = new List<MachineSetUpsVM>();
+            //using (var ctx = new SuperVCore.Context.EnoplasticEntities())
+            //{
+            //    model = ctx.SetUpPartsLog
+            //        .Where(s => s.Works.MachineID == ID)
+            //        .Where(s => s.Works.Code == Code)
+            //        .Where(x => x.Works.Start.HasValue)
+            //        .Where(x => x.Works.Finish.HasValue)
+            //        .Where(x => x.Works.Start >= From)
+            //        .Where(x => x.Works.Finish <= To)
+            //        .Where(x => x.Value.HasValue)
+            //        .GroupBy(x => new { @name = x.SetUpParts.Description })
+            //        .Select(x => new ViewModels.MachineSetUpsVM()
+            //        {
+            //            Name = x.Key.name,
+            //            Quantity = x.Sum(g => g.Value.Value)
+            //        })
+            //        .OrderBy(x => x.Name)
+            //        .ToList();
+            //}
+            //ViewData["Code"] = Code;
+            //ViewData["ID"] = ID;
+            //ViewData["From"] = From;
+            //ViewData["To"] = To;
+            //return PartialView("_partialAttrezzaggiTable", model);
+
             using (var ctx = new SuperVCore.Context.EnoplasticEntities())
             {
-                model = ctx.SetUpPartsLog
-                    .Where(s => s.Works.MachineID == ID)
-                    .Where(s => s.Works.Code == Code)
-                    .Where(x => x.Works.Start.HasValue)
-                    .Where(x => x.Works.Finish.HasValue)
-                    .Where(x => x.Works.Start >= From)
-                    .Where(x => x.Works.Finish <= To)
-                    .Where(x => x.Value.HasValue)
-                    .GroupBy(x => new { @name = x.SetUpParts.Description })
-                    .Select(x => new ViewModels.MachineSetUpsVM()
-                    {
-                        Name = x.Key.name,
-                        Quantity = x.Sum(g => g.Value.Value)
-                    })
-                    .OrderBy(x => x.Name)
-                    .ToList();
+                var attrezzaggi = ctx.SP_AggegatedSetUpLog_Machine_CODE(ID, Code).ToList();
+                return PartialView("_partialAttrezzaggiTable", attrezzaggi);
+
             }
-            ViewData["Code"] = Code;
-            ViewData["ID"] = ID;
-            ViewData["From"] = From;
-            ViewData["To"] = To;
-            return PartialView("_partialAttrezzaggiTable", model);
         }
 
         public ActionResult GetFermiTable(int ID, DateTime From, DateTime To, string Code)
         {
-            ViewData["Code"] = Code;
-            var model = new List<Test>();
-            model.Add(new Controllers.Test()
+            using (var ctx = new SuperVCore.Context.EnoplasticEntities())
             {
-                Name = "AAAA"
-            });
-            model.Add(new Controllers.Test()
-            {
-                Name = "BBB"
-            });
-            return PartialView("_partialFermiTable", model);
+                var fermi = ctx.SP_AggegatedDowntimes_Machine_CODE(ID, Code).ToList();
+                return PartialView("_partialFermiTable", fermi);
+            }
         }
 
         public ActionResult Dashboard()
@@ -270,17 +292,17 @@ namespace SuperV.Controllers
 
         }
 
-        XtraReport1 report = new XtraReport1();
+        //XtraReport1 report = new XtraReport1();
 
-        public ActionResult DocumentViewerPartial()
-        {
-            return PartialView("_DocumentViewerPartial", report);
-        }
+        //public ActionResult DocumentViewerPartial()
+        //{
+        //    return PartialView("_DocumentViewerPartial", report);
+        //}
 
-        public ActionResult DocumentViewerPartialExport()
-        {
-            return DocumentViewerExtension.ExportTo(report, Request);
-        }
+        //public ActionResult DocumentViewerPartialExport()
+        //{
+        //    return DocumentViewerExtension.ExportTo(report, Request);
+        //}
 
         public ActionResult ExportDetails(DateTime From, DateTime To, int MachineID)
         {
@@ -288,10 +310,11 @@ namespace SuperV.Controllers
             ViewData["MachineID"] = MachineID;
             ViewData["From"] = From.ToString("o");
             ViewData["To"] = To.ToString("o");
-            SuperVCore.Context.EnoplasticEntities db = new SuperVCore.Context.EnoplasticEntities();
-            var model = db.SP_ReportWorks_StartDate_EndDate_MachineID(From, To, MachineID).ToList();
-            return View(model);
-        }
+            using (var ctx = new SuperVCore.Context.EnoplasticEntities())
+            {
+                var model = ctx.SP_ReportWorks_StartDate_EndDate_MachineID(From, To, MachineID).ToList();
+                return View(model);
+            }        }
 
 
         [ValidateInput(false)]

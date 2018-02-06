@@ -111,10 +111,44 @@ textarea {
 }
 
 .well-machine-details{
-	padding: 5px 15px 5px 15px;
+	padding: 0px 15px 0px 15px;
 	border-radius:15px;
 	border:0px;
-	
+}
+
+.well-machine-detail-name{
+    color:#171717;
+    padding-top:20px;
+    font-size:2.5em;
+    font-weight: bold;
+    text-align : center;
+}
+
+.well-machine-detail-label{
+    color:#171717;
+    text-align:center;
+}
+
+.well-machine-detail-speed{
+    text-align:center;
+    padding-top:20px;
+    color:#171717;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.well-machine-detail-code{
+    text-align :center;
+    padding-top:20px;
+    color:#171717;
+    font-size:2.5em;
+    font-weight: bold;
+
+}
+
+.well-machine-detail-print{
+    margin-top: -65px;
+    margin-left: 200px; 
 }
 
 .well-grid-details{
@@ -165,6 +199,8 @@ textarea {
 	font-weight:bold;
 	text-align:center;
 }
+
+
 
 /* colore di una macchina DISCONNESSA (0) GRIGIO SCURO */
 .bg-machine-disconnected {
@@ -246,6 +282,23 @@ textarea {
 	background-color: #924766;
 }
 
+/* colore di una macchine in PULIZIA */
+.bg-machine-clean {
+    background-color: #7DA7D9;
+}
+
+.bg-highlight-strip-clean{
+    background-color: #5e7ea4;
+}
+
+.bg-machine-07-clean {
+    background-color: #00aed6;
+}
+
+.bg-highlight-strip-07-clean{
+    background-color: #02809d;
+}
+
 /* colore di una macchina INATTIVA*/
 .bg-machine-inactive{
 	background-color: #FFFFFF;
@@ -273,6 +326,43 @@ textarea {
 	background-color:#994466;
 }
 
+.bg-machine-09-nav {
+    background-color:#FF8B00;
+}
+
+.bg-highlight-strip-09-nav{
+    background-color:#b76400;
+}
+
+.bg-machine-02-color{
+    background-color :#ffb600;
+}
+
+.bg-highlight-strip-02-color {
+    background-color: #c3900f;
+}
+
+.bg-machine-01-change{
+    background-color: #f275a9;
+}
+
+.bg-highlight-strip-01-change{
+    background-color:#904a68;
+}
+
+.bg-machine-21-setup {
+    background-color:#F36523;
+}
+
+.bg-highlight-strip-21-setup{
+    background-color: #b64c1b;
+}
+.bg-machine-99-production{
+    background-color:#8DC73F;
+}
+.bg-highlight-strip-99-production{
+    background-color: #608a28;
+}
 .theme-color{
 	color:#FF8B00;
 }

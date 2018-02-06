@@ -77,6 +77,8 @@ namespace SuperV.ViewModels
         /// <summary>
         /// La lista dei work items lavorati dalla macchina nell'intervallo di tempo tra StartDate e StopDate.
         /// </summary>
-        public IEnumerable<MachineWorkItemVM> WorkItems { get; set; }
+        //public IEnumerable<MachineWorkItemVM> WorkItems { get; set; }
+
+        public List<SuperVCore.Context.SP_AggegatedWorks_Machine_Result> WorkItemRows { get; set; }
     }
 }
