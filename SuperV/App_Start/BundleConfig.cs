@@ -58,6 +58,7 @@ namespace SuperV
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
                       "~/Scripts/jquery.bootstrap-autohidingnavbar.js",
+                      "~/Scripts/date.js",
                       "~/Scripts/site.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/signalr").Include(

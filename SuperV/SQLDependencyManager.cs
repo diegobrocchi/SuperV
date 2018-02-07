@@ -56,6 +56,8 @@ namespace SuperV
                                                             ,[Counter]
                                                             ,[ResettableCounter]
                                                             ,[ErrorsString]
+                                                            ,[StartPhase]
+                                                            ,[LastUpdate]
                                                     FROM [dbo].[MachineStatus]", connection))
                     {
                         command.Notification = null;

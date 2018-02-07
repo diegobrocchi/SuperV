@@ -2,6 +2,7 @@
 using SuperV.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -29,7 +30,11 @@ namespace SuperV.Controllers
         public ActionResult PanelPartial()
         {
             var model = new PartialPanelVM();
-            List<MachineData> machinesData = new List<ViewModels.MachineData>();
+            int minutesDelayForInactivity = Convert.ToInt32(ConfigurationManager.AppSettings["minutesDelayForInactivity"]);
+            DateTime deadTime = DateTime.Now.AddMinutes(-1 * minutesDelayForInactivity);
+            byte inactiveStatus =0;
+
+            List <MachineData> machinesData = new List<ViewModels.MachineData>();
             using (var ctx = new SuperVCore.Context.EnoplasticEntities())
             {
                 machinesData = ctx.MachineStatus
@@ -37,12 +42,12 @@ namespace SuperV.Controllers
                     .Select(x => new ViewModels.MachineData()
                     {
                         MachineID = x.MachineID,
-                        Speed = x.Speed.Value,
+                        Speed = (x.LastUpdate.HasValue && System.Data.Entity.DbFunctions.DiffMinutes(x.LastUpdate, deadTime) >0) ? 0 : x.Speed.Value,
                         ProductCode = x.ProductCode,
-                        Status = x.MachineStateID.Value,
+                        Status = (x.LastUpdate.HasValue && System.Data.Entity.DbFunctions.DiffMinutes(x.LastUpdate, deadTime) > 0) ? inactiveStatus :  x.MachineStateID.Value,
                         TotalCount = x.Counter.Value,
                         MachineName = x.Machines.Name,
-                        WorkOperation = x.MachineStates.Name
+                        WorkOperation = (x.LastUpdate.HasValue && System.Data.Entity.DbFunctions.DiffMinutes(x.LastUpdate, deadTime) > 0) ? "Disconnessa" : x.MachineStates.Name
                     }).ToList();
             }
 
@@ -93,7 +98,7 @@ namespace SuperV.Controllers
                 model.From = queryDateFrom;
                 model.To = queryDateTo;
                 model.Status = Status;
-                model.WorkItemRows = ctx.SP_AggegatedWorks_Machine(ID).Take(10).ToList();
+                model.WorkItemRows = ctx.SP_AggegatedWorks_Machine(ID).ToList();
                 //model.WorkItems = ctx.Works.Where(x => x.MachineID == ID)
                 //    .Where(x => x.Start.HasValue)
                 //    .Where(x => x.Finish.HasValue)
@@ -131,7 +136,7 @@ namespace SuperV.Controllers
             using (var ctx = new SuperVCore.Context.EnoplasticEntities())
             {
                 var actualStatusMachine = ctx.MachineStatus.Where(x => x.MachineID == ID).SingleOrDefault();
-                var rows = ctx.SP_AggegatedWorks_Machine(ID).Take(10).ToList();
+                var rows = ctx.SP_AggegatedWorks_Machine(ID).ToList();
 
                 return PartialView("_GridViewPartial", rows);
             }
