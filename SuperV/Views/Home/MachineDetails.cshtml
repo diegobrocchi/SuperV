@@ -14,7 +14,6 @@
          
         var machineID = $('#ID').val();
         var dateFrom = new Date(getDateFromFormat($('#From_I').val(), 'dd/MM/yyyy')).toJSON();
-        alert(dateFrom);
         var dateTo = new Date(getDateFromFormat($('#To_I').val(), 'dd/MM/yyyy')).toJSON();
 
         $('#linkReportExport').attr('href', '/home/ExportDetails?MachineID=' + machineID + '&From=' + dateFrom + '&To=' + dateTo);
